@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "AT0g9pPZ2z0AQzpVlKee5SK1F2H3Oqk3CviGRxtgfmZZJtXxylvM6iHon8QauWZivZwyrmMy3C5TtSnVrwpVfg==",
+  "success": true,
+  "projectFilePath": "/home/daria/develop/uni/clojure-compiler/lexer/lexer/lexer.csproj",
+  "expectedPackageFiles": [
+    "/home/daria/.nuget/packages/antlr4.runtime.standard/4.9.2/antlr4.runtime.standard.4.9.2.nupkg.sha512"
+  ],
+  "logs": []
+}
