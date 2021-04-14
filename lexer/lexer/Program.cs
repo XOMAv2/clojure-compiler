@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Collections.Generic;
 using Antlr4.Runtime;
 
 namespace lexer
@@ -10,15 +10,26 @@ namespace lexer
         {
             try
             {
-                Console.WriteLine("Input expression.");
-        
-                // to type the EOF character and end the input: use CTRL+D, then press <enter>
+                Console.Write("Input expression: ");
                 string input = Console.ReadLine();
-
                 AntlrInputStream inputStream = new AntlrInputStream(input);
-                ClojureLexer speakLexer = new ClojureLexer(inputStream);
-                CommonTokenStream commonTokenStream = new CommonTokenStream(speakLexer);
-                Console.WriteLine(commonTokenStream.GetNumberOfOnChannelTokens());
+                ClojureLexer lexer = new ClojureLexer(inputStream);
+                CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
+                IList<IToken> tokens = new List<IToken>();
+                while (commonTokenStream.LA(1) != -1)
+                {
+                    tokens.Add(commonTokenStream.LT(1));
+                    commonTokenStream.Consume();
+                }
+
+                int n = commonTokenStream.GetNumberOfOnChannelTokens() - 1;
+                Console.WriteLine("Number tokens: " + n);
+                int k = 1;
+                foreach (IToken tok in tokens)
+                {
+                    Console.WriteLine(k + " token: " + tok.Text);
+                    k++;
+                }
             }
             catch (Exception ex)
             {
