@@ -1,0 +1,15 @@
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\lexer.exe
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\lexer.deps.json
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\lexer.runtimeconfig.json
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\lexer.runtimeconfig.dev.json
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\lexer.dll
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\lexer.pdb
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\bin\Debug\netcoreapp3.1\Antlr4.Runtime.Standard.dll
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.csprojAssemblyReference.cache
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.AssemblyInfoInputs.cache
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.AssemblyInfo.cs
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.csproj.CoreCompileInputs.cache
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.csproj.CopyComplete
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.dll
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.pdb
+C:\Users\dvfir\dev\uni\clojure-compiler\lexer\lexer\obj\Debug\netcoreapp3.1\lexer.genruntimeconfig.cache
