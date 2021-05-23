@@ -15,7 +15,7 @@ namespace lexer
             try
             {
                 //Console.Write("Input expression: ");
-                string input = "(defn keyworded-map [& {function :function sequence :sequence}] (map function sequence))";//Console.ReadLine();
+                string input = "(defn kek [a b c] (let [a 5 b 5] (loop [g a] (when (not= g 0) (recur (dec g))))))";//(defn argcount ([] 0) ([x] 1) ([x y] 2) ([x y & more](+(argcount x y)(count more))))";//Console.ReadLine();
                 AntlrInputStream inputStream = new AntlrInputStream(input);
                 ClojureLexer lexer = new ClojureLexer(inputStream);
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);

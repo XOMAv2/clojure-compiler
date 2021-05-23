@@ -32,8 +32,8 @@ namespace lexer.Implementation
 
         private void AddValue(IParseTree context, string value)
         {
-            var parent = GetParentXml(context);
-            parent.Value = value;
+            var element = GetXml(context);
+            element.Value = value;
         }
 
         private void AddElement(IParseTree context, string name)
@@ -436,7 +436,7 @@ namespace lexer.Implementation
 
         public void ExitSymbol([NotNull] ClojureParser.SymbolContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitTag([NotNull] ClojureParser.TagContext context)
