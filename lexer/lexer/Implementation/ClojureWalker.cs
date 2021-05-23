@@ -41,12 +41,21 @@ namespace lexer.Implementation
             XElement element = new XElement(name);
             XElement ParentElement = GetParentXml(context);
             ParentElement.Add(element);
+            SetXml(context.Parent, ParentElement);
             SetXml(context, element);
         }
 
         void SetXml(IParseTree ctx, XElement e)
         {
-            xml.Put(ctx, e);
+            if (xml.Get(ctx) != null)
+            {
+                xml.RemoveFrom(ctx);
+                xml.Put(ctx, e);
+            }
+            else
+            {
+                xml.Put(ctx, e);
+            }           
         }
         public void EnterAny_char([NotNull] ClojureParser.Any_charContext context)
         {
@@ -262,7 +271,7 @@ namespace lexer.Implementation
 
         public void ExitBacktick([NotNull] ClojureParser.BacktickContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitBign([NotNull] ClojureParser.BignContext context)
@@ -277,22 +286,22 @@ namespace lexer.Implementation
 
         public void ExitCharacter([NotNull] ClojureParser.CharacterContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitDeref([NotNull] ClojureParser.DerefContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitDiscard([NotNull] ClojureParser.DiscardContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitDispatch([NotNull] ClojureParser.DispatchContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitEveryRule(ParserRuleContext ctx)
@@ -302,23 +311,22 @@ namespace lexer.Implementation
 
         public void ExitFile([NotNull] ClojureParser.FileContext context)
         {
-            XElement file = GetXml(context);
-            file.Value = context.Start.Text;
+            
         }
 
         public void ExitForm([NotNull] ClojureParser.FormContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitForms([NotNull] ClojureParser.FormsContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitGensym([NotNull] ClojureParser.GensymContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitHex([NotNull] ClojureParser.HexContext context)
@@ -328,42 +336,42 @@ namespace lexer.Implementation
 
         public void ExitHost_expr([NotNull] ClojureParser.Host_exprContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitKeyword([NotNull] ClojureParser.KeywordContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitLambda([NotNull] ClojureParser.LambdaContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitList([NotNull] ClojureParser.ListContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitLiteral([NotNull] ClojureParser.LiteralContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitMacro_keyword([NotNull] ClojureParser.Macro_keywordContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitMap([NotNull] ClojureParser.MapContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitMeta_data([NotNull] ClojureParser.Meta_dataContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitNamed_char([NotNull] ClojureParser.Named_charContext context)
@@ -393,27 +401,27 @@ namespace lexer.Implementation
 
         public void ExitQuote([NotNull] ClojureParser.QuoteContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitReader_macro([NotNull] ClojureParser.Reader_macroContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitRegex([NotNull] ClojureParser.RegexContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitSet([NotNull] ClojureParser.SetContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitSimple_keyword([NotNull] ClojureParser.Simple_keywordContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitSimple_sym([NotNull] ClojureParser.Simple_symContext context)
@@ -433,17 +441,17 @@ namespace lexer.Implementation
 
         public void ExitTag([NotNull] ClojureParser.TagContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitUnquote([NotNull] ClojureParser.UnquoteContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitUnquote_splicing([NotNull] ClojureParser.Unquote_splicingContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitU_hex_quad([NotNull] ClojureParser.U_hex_quadContext context)
@@ -453,12 +461,12 @@ namespace lexer.Implementation
 
         public void ExitVar_quote([NotNull] ClojureParser.Var_quoteContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void ExitVector([NotNull] ClojureParser.VectorContext context)
         {
-            AddValue(context, context.Start.Text);
+            
         }
 
         public void VisitErrorNode(IErrorNode node)
