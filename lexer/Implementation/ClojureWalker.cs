@@ -476,7 +476,20 @@ namespace lexer.Implementation
 
         public void VisitTerminal(ITerminalNode node)
         {
-            Console.WriteLine("Visiting Terminal");
+            String type = node.Symbol.Type.ToString();
+            int num = 0;
+            Int32.TryParse(type, out num);
+            int numLen = ClojureLexer.ruleNames.Length;
+            if (num < ClojureLexer.ruleNames.Length && num > 0)
+            {
+                string typeName = ClojureLexer.ruleNames[num];
+                XElement element = new XElement("element");
+                element.Add(new XAttribute("type", typeName));
+                XElement ParentElement = GetXml(node.Parent);
+                ParentElement.Add(element);
+                SetXml(node.Parent, element);                
+            }            
+            //Console.WriteLine($"Visiting Terminal {typeName} {node.Symbol.Text}");
         }
     }
 }
