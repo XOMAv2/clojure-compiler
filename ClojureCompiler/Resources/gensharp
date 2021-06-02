@@ -1,0 +1,2 @@
+java -jar antlr-4.9.2-complete.jar -Dlanguage=CSharp -visitor -listener -package ClojureCompiler.Generated -o ../Generated Clojure.g4
+dotnet add package Antlr4.Runtime.Standard
