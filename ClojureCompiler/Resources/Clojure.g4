@@ -25,7 +25,7 @@
 
 grammar Clojure;
 
-file: form * EOF;
+file: forms EOF;
 
 form: literal
     | list
@@ -92,7 +92,7 @@ gensym
     ;
 
 lambda
-    : '#(' form* ')'
+    : '#(' forms ')'
     ;
 
 meta_data
