@@ -389,3 +389,6 @@ FodyWeavers.xsd
 
 # macOS
 .DS_Store
+
+# Graphviz
+*.dot
