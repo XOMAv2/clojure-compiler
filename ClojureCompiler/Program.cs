@@ -3,6 +3,7 @@ using Antlr4.Runtime.Tree;
 using ClojureCompiler.Generated;
 using ClojureCompiler.Extensions;
 using System;
+using System.IO;
 
 namespace ClojureCompiler
 {
@@ -34,6 +35,7 @@ namespace ClojureCompiler
                 ClojureParser parser = new(tokenStream);
                 IParseTree root = parser.file();
                 Console.WriteLine(root.ToIndentedTree(parser));
+                File.WriteAllText("../../../Resources/ParseTree.dot", root.ToDotTree());
             }
             catch (Exception e)
             {
