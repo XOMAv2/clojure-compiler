@@ -26,8 +26,6 @@ namespace ClojureCompiler.Extensions
 
         private bool hadReserved = false;
 
-        private bool wasVecMap = false;
-
         private List<String> reservedFunctions = new List<string>() { 
             "'", "`", "quote", "syntax-quote"
         };
@@ -447,26 +445,10 @@ namespace ClojureCompiler.Extensions
 
         public void VisitTerminal(ITerminalNode node)
         {
-            Console.WriteLine(node.GetText());
             if (reservedFunctions.Contains(node.GetText()))
             {
                 hadReserved = true;
-            }
-            /*else if (node.GetText().Equals("{") || node.GetText().Equals("["))
-            {
-                if (currentFunc == null)
-                {
-                    currentFunc = node.GetText();
-                    graph.Node(currentFunc);
-                }
-                else
-                {
-                    graph.Edge(currentFunc, node.GetText());
-                }
-                prevFunc = currentFunc;
-                currentFunc = node.GetText();
-                wasVecMap = true;
-            }*/
+            }            
             else if (node.GetText().Equals("(") && !hadReserved)
             {
                 if (prevChild != null)
@@ -481,7 +463,7 @@ namespace ClojureCompiler.Extensions
                 currentFunc = node.GetText();
                 graph.Node(currentFunc);
             }
-            else if (prevDefn /*|| wasVecMap)*/ && currentFunc != null)
+            else if (prevDefn && currentFunc != null)
             {
                 graph.Node(node.GetText());
                 graph.Edge(currentFunc, node.GetText());
@@ -495,12 +477,6 @@ namespace ClojureCompiler.Extensions
                 prevChild = null;
                 hadReserved = false;
             }
-            /*else if (node.GetText().Equals("}") || node.GetText().Equals("]"))
-            {
-                wasVecMap = false;
-                currentFunc = prevFunc;
-
-            }*/
         }
     }
 }
