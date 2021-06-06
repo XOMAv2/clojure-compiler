@@ -36,6 +36,12 @@ namespace ClojureCompiler
                 IParseTree root = parser.file();
                 Console.WriteLine(root.ToIndentedTree(parser));
                 File.WriteAllText("../../../Resources/ParseTree.dot", root.ToDotTree());
+                ClojureWalker walker = new ClojureWalker();
+                walker.parser = parser;
+                walker.graph = new CallGraph();
+                ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
+                parseTreeWalker.Walk(walker, root);
+                Console.WriteLine(walker.graph.ToDot());
             }
             catch (Exception e)
             {
