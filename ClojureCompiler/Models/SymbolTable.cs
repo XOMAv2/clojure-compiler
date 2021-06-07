@@ -92,5 +92,29 @@ namespace ClojureCompiler.Models
         {
             return _scopeStack.SingleOrDefault(s => s.Guid == guid);
         }
+
+        public string ToDot()
+        {
+            string buf = "digraph SymbolTable {\n";
+
+            foreach (Scope scope in Scopes)
+            {
+                var symDefs = scope.SymbolMap.Keys.Select(
+                    symName => $"{scope.SymbolMap[symName].GetType().Name.Replace("Symbol", string.Empty)} {symName};");
+                buf += $"\"{scope.Guid}\" [label=\"{string.Join(" \n", symDefs)}\"]\n";
+            }
+
+            foreach (Scope scope in Scopes)
+            {
+                if (scope.Parent != null)
+                {
+                    buf += $"\"{scope.Parent?.Guid}\" -> \"{scope.Guid}\"\n";
+                }
+            }
+
+            buf += "}\n";
+
+            return buf;
+        }
     }
 }
