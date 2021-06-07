@@ -15,9 +15,9 @@ namespace ClojureCompiler
             {
                 string input = @"
 (defn kek [a b c]
-  (let [a 5.0 b 5]
+  (let [a (+ 5.0 3) b (- 5 2)]
     (loop [g a]
-      (when (not= g 0)
+      (when `(not= g 0)
         (recur (dec g))))))";
 
                 string input2 = @"
@@ -41,7 +41,7 @@ namespace ClojureCompiler
                 walker.graph = new CallGraph();
                 ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
                 parseTreeWalker.Walk(walker, root);
-                Console.WriteLine(walker.graph.ToDot());
+                walker.graph.CreateGraphFile();
             }
             catch (Exception e)
             {

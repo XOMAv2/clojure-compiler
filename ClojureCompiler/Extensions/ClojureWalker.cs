@@ -16,6 +16,10 @@ namespace ClojureCompiler.Extensions
 
         public ClojureParser parser { get; set; }
 
+        private Stack<String> previousFunc = new Stack<string>();
+
+        private int breckets = 0;
+
         private bool prevDefn = false;
 
         private String currentFunc = null;
@@ -445,36 +449,48 @@ namespace ClojureCompiler.Extensions
 
         public void VisitTerminal(ITerminalNode node)
         {
-            if (reservedFunctions.Contains(node.GetText()))
+            String temp = node.GetText();
+            if (reservedFunctions.Contains(temp))
             {
                 hadReserved = true;
+                graph.Node("quote");
+                if (prevChild != null)
+                    graph.Edge(prevChild, "quote");
+                else if (currentFunc != null)
+                    graph.Edge(currentFunc, "quote");
             }            
-            else if (node.GetText().Equals("(") && !hadReserved)
+            else if (temp.Equals("(") && !hadReserved)
             {
+                breckets += 1;
                 if (prevChild != null)
                 {
-                    prevFunc = currentFunc;
+                    previousFunc.Push(currentFunc);
                     currentFunc = prevChild;
                 }
                 prevDefn = true;
             }
             else if (prevDefn && currentFunc == null)
             {
-                currentFunc = node.GetText();
+                currentFunc = temp;
                 graph.Node(currentFunc);
+                prevDefn = false;
             }
             else if (prevDefn && currentFunc != null)
             {
-                graph.Node(node.GetText());
-                graph.Edge(currentFunc, node.GetText());
-                prevChild = node.GetText();
+                graph.Node(temp);
+                graph.Edge(currentFunc, temp);
+                prevChild = temp;
                 prevDefn = false;
             }
-            else if (node.GetText().Equals(")"))
-            {                
-                currentFunc = prevFunc;
-                prevFunc = null;
-                prevChild = null;
+            else if (temp.Equals(")"))
+            {
+                breckets -= 1;
+                if (previousFunc.Count > 0 && breckets == previousFunc.Count)
+                    currentFunc = previousFunc.Pop();
+                else if (previousFunc.Count == 0)
+                    currentFunc = null;
+                if (!hadReserved)
+                    prevChild = null;
                 hadReserved = false;
             }
         }
