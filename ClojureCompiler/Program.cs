@@ -60,6 +60,7 @@ namespace ClojureCompiler
 
                 SymbolTableVisitor<bool> symbolTableVisitor = new();
                 symbolTableVisitor.Visit(root);
+                File.WriteAllText($"{resourcesPath}SymbolTable.dot", symbolTableVisitor.SymbolTable.ToDot());
             }
             catch (Exception e)
             {
