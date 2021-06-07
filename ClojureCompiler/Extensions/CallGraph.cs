@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,16 @@ namespace ClojureCompiler.Extensions
             nodes.Add(node);
         }
 
-        public String​ ToDot()
+        public void CreateGraphFile()
+        {
+            String fileContent = ToDot();
+            String filename = "callgraph.dot";
+            File.WriteAllText(filename, fileContent);
+
+        }
+
+
+        private String​ ToDot()
         {
             string buf = "";
             buf += "digraph G {\n";
@@ -36,15 +46,17 @@ namespace ClojureCompiler.Extensions
                 buf += "; ";
             }
             buf += "\n";
+            string newBuf = "";
             for (int i = 0; i < edges.Count; i++)
-            {        
-                buf += "  ";
-                buf += edges[i].Key;
-                buf += " -> ";
-                buf += edges[i].Value;
-                buf += ";\n";
+            {
+                newBuf += "  ";
+                newBuf += edges[i].Key;
+                newBuf += " -> ";
+                newBuf += edges[i].Value;
+                newBuf += ";\n";
             }
-            buf += "}\n";
+            Console.WriteLine(newBuf);
+            buf += newBuf + "}\n";
             return buf;
         } 
     }
