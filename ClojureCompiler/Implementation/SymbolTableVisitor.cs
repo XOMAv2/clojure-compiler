@@ -298,7 +298,7 @@ namespace ClojureCompiler.Implementation
         {
             _ = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
 
-            if (context.forms().ChildCount == 1 || context.forms().ChildCount == 2)
+            if (context.forms().ChildCount == 1)
             {
                 throw new SyntaxException("Too few arguments to let.");
             }
