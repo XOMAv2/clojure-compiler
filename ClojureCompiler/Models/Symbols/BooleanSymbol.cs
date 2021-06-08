@@ -4,9 +4,9 @@ using static ClojureCompiler.Generated.ClojureParser;
 
 namespace ClojureCompiler.Models.Symbols
 {
-    public class FunctionSymbol : SymbolBase
+    public class BooleanSymbol : SymbolBase
     {
-        public FunctionSymbol(
+        public BooleanSymbol(
             SymbolContext context,
             Scope scope,
             Dictionary<string, ParserRuleContext> meta = null)
