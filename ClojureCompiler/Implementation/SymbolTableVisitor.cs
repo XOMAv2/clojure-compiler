@@ -45,10 +45,12 @@ namespace ClojureCompiler.Implementation
             };
 
             var result = base.VisitList(context);
+
             for (int i = 0; i < scopeCount; i++)
             {
                 SymbolTable.PopScope();
             }
+
             return result;
         }
 
@@ -83,13 +85,16 @@ namespace ClojureCompiler.Implementation
                 // Any symbol declaration.
                 (null, null, null) => new AnySymbol(arg1, symbolTable.Root),
 
-                // TODO: Type resolving.
-
                 // Typed symbol declaration without docString.
-                ({ }, null, null) => new AnySymbol(arg1, symbolTable.Root),
+                ({ }, null, null) => (SymbolBase)Activator.CreateInstance(
+                    new TypeResolvingVisitor().Resolve(arg2),
+                    arg1,
+                    symbolTable.Root,
+                    null),
 
                 // Typed symbol declaration with docString.
-                ({ }, { }, { }) => new AnySymbol(
+                ({ }, { }, { }) => (SymbolBase)Activator.CreateInstance(
+                    new TypeResolvingVisitor().Resolve(arg2),
                     arg1,
                     symbolTable.Root,
                     new Dictionary<string, ParserRuleContext>() { { ":doc", docString } }),
@@ -321,10 +326,9 @@ namespace ClojureCompiler.Implementation
 
                 _ = left ?? throw new SyntaxException("Cannot bind to a non-symbol.");
 
-                // TODO: Type resolving for right variable before creating a new scope.
-
                 Scope scope = symbolTable.PushScope();
-                scope.Define(new AnySymbol(left, scope));
+                Type symbolType = new TypeResolvingVisitor().Resolve(right);
+                scope.Define((SymbolBase)Activator.CreateInstance(symbolType, left, scope, null));
             }
 
             return scopeCount;
@@ -358,10 +362,9 @@ namespace ClojureCompiler.Implementation
 
                 _ = left ?? throw new SyntaxException("Cannot bind to a non-symbol.");
 
-                // TODO: Type resolving for right variable before creating a new scope.
-
                 Scope scope = symbolTable.PushScope();
-                scope.Define(new AnySymbol(left, scope));
+                Type symbolType = new TypeResolvingVisitor().Resolve(right);
+                scope.Define((SymbolBase)Activator.CreateInstance(symbolType, left, scope, null));
             }
 
             return scopeCount;
