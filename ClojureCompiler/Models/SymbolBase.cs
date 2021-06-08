@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Antlr4.Runtime;
 using static ClojureCompiler.Generated.ClojureParser;
 
-namespace ClojureCompiler.Models.Symbols
+namespace ClojureCompiler.Models
 {
     /// <summary>
     /// Represents symbol in symbol table.

@@ -1,9 +1,10 @@
-﻿namespace ClojureCompiler.Models.Symbols
+﻿namespace ClojureCompiler.Models
 {
     public enum SymbolType
     {
         Any,
         Nil,
+        Boolean,
         Number,
         String,
         Character,
