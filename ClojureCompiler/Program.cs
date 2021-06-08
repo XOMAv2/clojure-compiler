@@ -52,6 +52,23 @@ namespace ClojureCompiler
   (let [a b])
   (let [a b]))";
 
+                string input4 = @"
+(defn kek [a b]
+  (let [a (+ 1 2)
+        b (fn ([c]))]
+    (loop [x a
+           y 5]
+      (when (not= x y)
+        '(dec 4)))))";
+
+                string input5 = @"
+(let [a 5
+      b a
+      c nil
+      d true
+      ggg ""kkk""
+      ggg \k])";
+
                 AntlrInputStream inputStream = new(input);
                 ClojureLexer lexer = new(inputStream);
                 CommonTokenStream tokenStream = new(lexer);
