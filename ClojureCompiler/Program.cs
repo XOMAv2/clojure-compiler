@@ -51,12 +51,12 @@ namespace ClojureCompiler
                 string resourcesPath = "../../../Resources/";
                 File.WriteAllText($"{resourcesPath}ParseTree.dot", root.ToDotTree());
 
-                ClojureWalker walker = new();
-                walker.Parser = parser;
-                walker.Graph = new CallGraph();
+                CallGraphListener callGraphaListener = new();
+                callGraphaListener.Parser = parser;
+                callGraphaListener.Graph = new CallGraph();
                 ParseTreeWalker parseTreeWalker = new();
-                parseTreeWalker.Walk(walker, root);
-                File.WriteAllText($"{resourcesPath}CallGraph.dot", walker.Graph.ToDot());
+                parseTreeWalker.Walk(callGraphaListener, root);
+                File.WriteAllText($"{resourcesPath}CallGraph.dot", callGraphaListener.Graph.ToDot());
 
                 SymbolTableVisitor<bool> symbolTableVisitor = new();
                 symbolTableVisitor.Visit(root);

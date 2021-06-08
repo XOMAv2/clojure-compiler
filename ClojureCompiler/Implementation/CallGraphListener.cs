@@ -2,15 +2,16 @@
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using ClojureCompiler.Generated;
+using ClojureCompiler.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClojureCompiler.Extensions
+namespace ClojureCompiler.Implementation
 {
-    class ClojureWalker : ClojureBaseListener
+    class CallGraphListener : ClojureBaseListener
     {
         public CallGraph Graph { get; set; }
 
