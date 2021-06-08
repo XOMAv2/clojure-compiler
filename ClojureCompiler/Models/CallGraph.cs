@@ -26,14 +26,10 @@ namespace ClojureCompiler.Models
         public string ToDot()
         {
             string buf = "digraph CallGraph {\n";
-            buf += "  ranksep=.25;\n";
-            buf += "  edge [arrowsize=.5]\n";
-            buf += "  node [shape=circle, fontname=\"ArialNarrow\",\n";
-            buf += "        fontsize=12, fixedsize=true, height=.45];\n";
 
             for (int i = 0; i < nodes.Count; i++)
             {
-                buf += $"  \"{nodes[i]}\";\n";    
+                buf += $"\"{nodes[i]}\";\n";    
             }
 
             buf += "\n";
@@ -41,7 +37,7 @@ namespace ClojureCompiler.Models
 
             for (int i = 0; i < edges.Count; i++)
             {
-                newBuf += $"  \"{edges[i].Key}\" -> \"{edges[i].Value}\";\n";
+                newBuf += $"\"{edges[i].Key}\" -> \"{edges[i].Value}\";\n";
             }
 
             //Console.WriteLine(newBuf);
