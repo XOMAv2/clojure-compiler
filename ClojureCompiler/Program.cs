@@ -47,6 +47,11 @@ namespace ClojureCompiler
    (+ (argcount x y)
       (count more))))";
 
+                string input3 = @"
+(let [a b]
+  (let [a b])
+  (let [a b]))";
+
                 AntlrInputStream inputStream = new(input);
                 ClojureLexer lexer = new(inputStream);
                 CommonTokenStream tokenStream = new(lexer);
