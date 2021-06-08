@@ -101,7 +101,7 @@ namespace ClojureCompiler.Models
             {
                 var symDefs = scope.SymbolMap.Keys.Select(
                     symName => $"{scope.SymbolMap[symName].GetType().Name.Replace("Symbol", string.Empty)} {symName};");
-                buf += $"\"{scope.Guid}\" [label=\"{string.Join(" \n", symDefs)}\"]\n";
+                buf += $"\"{scope.Guid}\" [label=\"{string.Join(" \n", symDefs)}\" shape=\"box\"]\n";
             }
 
             foreach (Scope scope in Scopes)

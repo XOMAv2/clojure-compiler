@@ -20,7 +20,12 @@ namespace ClojureCompiler
             {
                 string input = @"
 (defn kek [a b c]
-  (let [a (+ 5.0 3) b (- 5 2) _ b]
+  (let [a (+ 5.0 3)
+        b (- 5 2)
+        _ (fn [x y] nil)
+        _ (fn ggg
+            ([a])
+            ([a b]))]
     (loop [g a]
       (when `(not= g 0)
         (recur (dec g))))))
@@ -29,7 +34,7 @@ namespace ClojureCompiler
   ([] 0)
   ([x] 1)
   ([x y] 2)
-  ([x y & more]
+  ([x y z]
    (+ (argcount x y)
       (count more))))";
 
