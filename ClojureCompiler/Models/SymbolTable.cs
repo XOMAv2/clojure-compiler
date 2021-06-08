@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ClojureCompiler.Models
@@ -99,8 +100,11 @@ namespace ClojureCompiler.Models
 
             foreach (Scope scope in Scopes)
             {
-                var symDefs = scope.SymbolMap.Keys.Select(
-                    symName => $"{scope.SymbolMap[symName].GetType().Name.Replace("Symbol", string.Empty)} {symName};");
+                var symDefs = scope.SymbolMap.Keys.Select(symName =>
+                {
+                    string tmp = scope.SymbolMap[symName].GetType().Name;
+                    return $"{Regex.Replace(tmp, "Symbol$", string.Empty)} {symName};";
+                });
                 buf += $"\"{scope.Guid}\" [label=\"{string.Join(" \n", symDefs)}\" shape=\"box\"]\n";
             }
 

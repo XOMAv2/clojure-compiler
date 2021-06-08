@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
@@ -29,12 +30,12 @@ namespace ClojureCompiler.Extensions
         /// <param name="node"> Current parse tree node in lookup. </param>
         private static void ToDotRecursive(IParseTree node, StringBuilder buf)
         {
-            string nodeName = node.GetType().Name.Replace("Context", string.Empty);
+            string nodeName = Regex.Replace(node.GetType().Name, "Context$", string.Empty);
             string nodeHash = node.GetHashCode().ToString();
 
             for (int i = 0; i < node.ChildCount; i++)
             {
-                string childName = node.GetChild(i).GetType().Name.Replace("Context", string.Empty);
+                string childName = Regex.Replace(node.GetChild(i).GetType().Name, "Context$", string.Empty);
                 string childHash = node.GetChild(i).GetHashCode().ToString();
                 string childText = node.GetChild(i).GetText();
 
