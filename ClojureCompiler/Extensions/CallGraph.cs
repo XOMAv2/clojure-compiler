@@ -23,32 +23,30 @@ namespace ClojureCompiler.Extensions
             nodes.Add(node);
         }
 
-        private string ToDot()
+        public string ToDot()
         {
-            string buf = "";
-            buf += "digraph G {\n";
+            string buf = "digraph CallGraph {\n";
             buf += "  ranksep=.25;\n";
             buf += "  edge [arrowsize=.5]\n";
             buf += "  node [shape=circle, fontname=\"ArialNarrow\",\n";
             buf += "        fontsize=12, fixedsize=true, height=.45];\n";
-            buf += "  ";
+
             for (int i = 0; i < nodes.Count; i++)
             {
-                buf += nodes[i];       
-                buf += "; ";
+                buf += $"  \"{nodes[i]}\";\n";    
             }
+
             buf += "\n";
             string newBuf = "";
+
             for (int i = 0; i < edges.Count; i++)
             {
-                newBuf += "  ";
-                newBuf += edges[i].Key;
-                newBuf += " -> ";
-                newBuf += edges[i].Value;
-                newBuf += ";\n";
+                newBuf += $"  \"{edges[i].Key}\" -> \"{edges[i].Value}\";\n";
             }
+
             Console.WriteLine(newBuf);
             buf += newBuf + "}\n";
+
             return buf;
         } 
     }
