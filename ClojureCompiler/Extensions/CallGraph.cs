@@ -9,29 +9,21 @@ namespace ClojureCompiler.Extensions
 {
     class CallGraph
     {
-        List<string> nodes = new List<string>();
-        List<KeyValuePair<String​, String>> edges = new List<KeyValuePair<String, String>>();
+        private List<string> nodes = new();
 
-        public void Edge(String​ source, String target)
+        private List<KeyValuePair<string, string>> edges = new();
+
+        public void AddEdge(string source, string target)
         {
             edges.Add(new KeyValuePair<string, string>(source, target));
         }
 
-        public void Node(String node)
+        public void AddNode(string node)
         {
             nodes.Add(node);
         }
 
-        public void CreateGraphFile()
-        {
-            String fileContent = ToDot();
-            String filename = "callgraph.dot";
-            File.WriteAllText(filename, fileContent);
-
-        }
-
-
-        private String​ ToDot()
+        private string ToDot()
         {
             string buf = "";
             buf += "digraph G {\n";
