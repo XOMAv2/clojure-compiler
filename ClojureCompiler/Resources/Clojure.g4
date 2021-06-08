@@ -124,12 +124,13 @@ literal
     | number
     | character
     | nil
-    | BOOLEAN
+    | boolean
     | keyword
     | symbol
     | param_name
     ;
 
+boolean: BOOLEAN;
 string: STRING;
 hex: HEX;
 bin: BIN;

@@ -50,18 +50,19 @@ namespace ClojureCompiler.Generated
             RULE_unquote = 10, RULE_unquote_splicing = 11, RULE_tag = 12, RULE_deref = 13,
             RULE_gensym = 14, RULE_lambda = 15, RULE_meta_data = 16, RULE_var_quote = 17,
             RULE_host_expr = 18, RULE_discard = 19, RULE_dispatch = 20, RULE_regex = 21,
-            RULE_literal = 22, RULE_string = 23, RULE_hex = 24, RULE_bin = 25, RULE_bign = 26,
-            RULE_number = 27, RULE_character = 28, RULE_named_char = 29, RULE_any_char = 30,
-            RULE_u_hex_quad = 31, RULE_nil = 32, RULE_keyword = 33, RULE_simple_keyword = 34,
-            RULE_macro_keyword = 35, RULE_symbol = 36, RULE_simple_sym = 37, RULE_ns_symbol = 38,
-            RULE_param_name = 39;
+            RULE_literal = 22, RULE_boolean = 23, RULE_string = 24, RULE_hex = 25,
+            RULE_bin = 26, RULE_bign = 27, RULE_number = 28, RULE_character = 29,
+            RULE_named_char = 30, RULE_any_char = 31, RULE_u_hex_quad = 32, RULE_nil = 33,
+            RULE_keyword = 34, RULE_simple_keyword = 35, RULE_macro_keyword = 36,
+            RULE_symbol = 37, RULE_simple_sym = 38, RULE_ns_symbol = 39, RULE_param_name = 40;
         public static readonly string[] ruleNames = {
             "file", "form", "forms", "list", "vector", "map", "set", "reader_macro",
             "quote", "backtick", "unquote", "unquote_splicing", "tag", "deref", "gensym",
             "lambda", "meta_data", "var_quote", "host_expr", "discard", "dispatch",
-            "regex", "literal", "string", "hex", "bin", "bign", "number", "character",
-            "named_char", "any_char", "u_hex_quad", "nil", "keyword", "simple_keyword",
-            "macro_keyword", "symbol", "simple_sym", "ns_symbol", "param_name"
+            "regex", "literal", "boolean", "string", "hex", "bin", "bign", "number",
+            "character", "named_char", "any_char", "u_hex_quad", "nil", "keyword",
+            "simple_keyword", "macro_keyword", "symbol", "simple_sym", "ns_symbol",
+            "param_name"
         };
 
         private static readonly string[] _LiteralNames = {
@@ -146,9 +147,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 80;
+                    State = 82;
                     forms();
-                    State = 81;
+                    State = 83;
                     Match(Eof);
                 }
             }
@@ -225,42 +226,42 @@ namespace ClojureCompiler.Generated
             EnterRule(_localctx, 2, RULE_form);
             try
             {
-                State = 88;
+                State = 90;
                 ErrorHandler.Sync(this);
                 switch (Interpreter.AdaptivePredict(TokenStream, 0, Context))
                 {
                     case 1:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 83;
+                            State = 85;
                             literal();
                         }
                         break;
                     case 2:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 84;
+                            State = 86;
                             list();
                         }
                         break;
                     case 3:
                         EnterOuterAlt(_localctx, 3);
                         {
-                            State = 85;
+                            State = 87;
                             vector();
                         }
                         break;
                     case 4:
                         EnterOuterAlt(_localctx, 4);
                         {
-                            State = 86;
+                            State = 88;
                             map();
                         }
                         break;
                     case 5:
                         EnterOuterAlt(_localctx, 5);
                         {
-                            State = 87;
+                            State = 89;
                             reader_macro();
                         }
                         break;
@@ -327,18 +328,18 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 93;
+                    State = 95;
                     ErrorHandler.Sync(this);
                     _la = TokenStream.LA(1);
                     while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__4) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__14) | (1L << T__15) | (1L << T__16) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << STRING) | (1L << FLOAT) | (1L << HEX) | (1L << BIN) | (1L << LONG) | (1L << BIGN) | (1L << CHAR_U) | (1L << CHAR_NAMED) | (1L << CHAR_ANY) | (1L << NIL) | (1L << BOOLEAN) | (1L << SYMBOL) | (1L << NS_SYMBOL) | (1L << PARAM_NAME))) != 0))
                     {
                         {
                             {
-                                State = 90;
+                                State = 92;
                                 form();
                             }
                         }
-                        State = 95;
+                        State = 97;
                         ErrorHandler.Sync(this);
                         _la = TokenStream.LA(1);
                     }
@@ -399,11 +400,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 96;
-                    Match(T__0);
-                    State = 97;
-                    forms();
                     State = 98;
+                    Match(T__0);
+                    State = 99;
+                    forms();
+                    State = 100;
                     Match(T__1);
                 }
             }
@@ -462,11 +463,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 100;
-                    Match(T__2);
-                    State = 101;
-                    forms();
                     State = 102;
+                    Match(T__2);
+                    State = 103;
+                    forms();
+                    State = 104;
                     Match(T__3);
                 }
             }
@@ -531,26 +532,26 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 104;
+                    State = 106;
                     Match(T__4);
-                    State = 110;
+                    State = 112;
                     ErrorHandler.Sync(this);
                     _la = TokenStream.LA(1);
                     while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__4) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__14) | (1L << T__15) | (1L << T__16) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << STRING) | (1L << FLOAT) | (1L << HEX) | (1L << BIN) | (1L << LONG) | (1L << BIGN) | (1L << CHAR_U) | (1L << CHAR_NAMED) | (1L << CHAR_ANY) | (1L << NIL) | (1L << BOOLEAN) | (1L << SYMBOL) | (1L << NS_SYMBOL) | (1L << PARAM_NAME))) != 0))
                     {
                         {
                             {
-                                State = 105;
+                                State = 107;
                                 form();
-                                State = 106;
+                                State = 108;
                                 form();
                             }
                         }
-                        State = 112;
+                        State = 114;
                         ErrorHandler.Sync(this);
                         _la = TokenStream.LA(1);
                     }
-                    State = 113;
+                    State = 115;
                     Match(T__5);
                 }
             }
@@ -609,11 +610,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 115;
-                    Match(T__6);
-                    State = 116;
-                    forms();
                     State = 117;
+                    Match(T__6);
+                    State = 118;
+                    forms();
+                    State = 119;
                     Match(T__5);
                 }
             }
@@ -740,112 +741,112 @@ namespace ClojureCompiler.Generated
             EnterRule(_localctx, 14, RULE_reader_macro);
             try
             {
-                State = 134;
+                State = 136;
                 ErrorHandler.Sync(this);
                 switch (Interpreter.AdaptivePredict(TokenStream, 3, Context))
                 {
                     case 1:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 119;
+                            State = 121;
                             lambda();
                         }
                         break;
                     case 2:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 120;
+                            State = 122;
                             meta_data();
                         }
                         break;
                     case 3:
                         EnterOuterAlt(_localctx, 3);
                         {
-                            State = 121;
+                            State = 123;
                             regex();
                         }
                         break;
                     case 4:
                         EnterOuterAlt(_localctx, 4);
                         {
-                            State = 122;
+                            State = 124;
                             var_quote();
                         }
                         break;
                     case 5:
                         EnterOuterAlt(_localctx, 5);
                         {
-                            State = 123;
+                            State = 125;
                             host_expr();
                         }
                         break;
                     case 6:
                         EnterOuterAlt(_localctx, 6);
                         {
-                            State = 124;
+                            State = 126;
                             set();
                         }
                         break;
                     case 7:
                         EnterOuterAlt(_localctx, 7);
                         {
-                            State = 125;
+                            State = 127;
                             tag();
                         }
                         break;
                     case 8:
                         EnterOuterAlt(_localctx, 8);
                         {
-                            State = 126;
+                            State = 128;
                             discard();
                         }
                         break;
                     case 9:
                         EnterOuterAlt(_localctx, 9);
                         {
-                            State = 127;
+                            State = 129;
                             dispatch();
                         }
                         break;
                     case 10:
                         EnterOuterAlt(_localctx, 10);
                         {
-                            State = 128;
+                            State = 130;
                             deref();
                         }
                         break;
                     case 11:
                         EnterOuterAlt(_localctx, 11);
                         {
-                            State = 129;
+                            State = 131;
                             quote();
                         }
                         break;
                     case 12:
                         EnterOuterAlt(_localctx, 12);
                         {
-                            State = 130;
+                            State = 132;
                             backtick();
                         }
                         break;
                     case 13:
                         EnterOuterAlt(_localctx, 13);
                         {
-                            State = 131;
+                            State = 133;
                             unquote();
                         }
                         break;
                     case 14:
                         EnterOuterAlt(_localctx, 14);
                         {
-                            State = 132;
+                            State = 134;
                             unquote_splicing();
                         }
                         break;
                     case 15:
                         EnterOuterAlt(_localctx, 15);
                         {
-                            State = 133;
+                            State = 135;
                             gensym();
                         }
                         break;
@@ -906,9 +907,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 136;
+                    State = 138;
                     Match(T__7);
-                    State = 137;
+                    State = 139;
                     form();
                 }
             }
@@ -967,9 +968,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 139;
+                    State = 141;
                     Match(T__8);
-                    State = 140;
+                    State = 142;
                     form();
                 }
             }
@@ -1028,9 +1029,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 142;
+                    State = 144;
                     Match(T__9);
-                    State = 143;
+                    State = 145;
                     form();
                 }
             }
@@ -1089,9 +1090,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 145;
+                    State = 147;
                     Match(T__10);
-                    State = 146;
+                    State = 148;
                     form();
                 }
             }
@@ -1155,11 +1156,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 148;
-                    Match(T__11);
-                    State = 149;
-                    form();
                     State = 150;
+                    Match(T__11);
+                    State = 151;
+                    form();
+                    State = 152;
                     form();
                 }
             }
@@ -1218,9 +1219,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 152;
+                    State = 154;
                     Match(T__12);
-                    State = 153;
+                    State = 155;
                     form();
                 }
             }
@@ -1275,9 +1276,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 155;
+                    State = 157;
                     Match(SYMBOL);
-                    State = 156;
+                    State = 158;
                     Match(T__13);
                 }
             }
@@ -1336,11 +1337,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 158;
-                    Match(T__14);
-                    State = 159;
-                    forms();
                     State = 160;
+                    Match(T__14);
+                    State = 161;
+                    forms();
+                    State = 162;
                     Match(T__1);
                 }
             }
@@ -1404,23 +1405,23 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 162;
+                    State = 164;
                     Match(T__15);
-                    State = 167;
+                    State = 169;
                     ErrorHandler.Sync(this);
                     switch (Interpreter.AdaptivePredict(TokenStream, 4, Context))
                     {
                         case 1:
                             {
-                                State = 163;
+                                State = 165;
                                 map();
-                                State = 164;
+                                State = 166;
                                 form();
                             }
                             break;
                         case 2:
                             {
-                                State = 166;
+                                State = 168;
                                 form();
                             }
                             break;
@@ -1482,9 +1483,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 169;
+                    State = 171;
                     Match(T__16);
-                    State = 170;
+                    State = 172;
                     symbol();
                 }
             }
@@ -1548,11 +1549,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 172;
-                    Match(T__17);
-                    State = 173;
-                    form();
                     State = 174;
+                    Match(T__17);
+                    State = 175;
+                    form();
+                    State = 176;
                     form();
                 }
             }
@@ -1611,9 +1612,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 176;
+                    State = 178;
                     Match(T__18);
-                    State = 177;
+                    State = 179;
                     form();
                 }
             }
@@ -1677,11 +1678,11 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 179;
-                    Match(T__13);
-                    State = 180;
-                    symbol();
                     State = 181;
+                    Match(T__13);
+                    State = 182;
+                    symbol();
+                    State = 183;
                     form();
                 }
             }
@@ -1740,9 +1741,9 @@ namespace ClojureCompiler.Generated
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 183;
+                    State = 185;
                     Match(T__13);
-                    State = 184;
+                    State = 186;
                     @string();
                 }
             }
@@ -1781,7 +1782,11 @@ namespace ClojureCompiler.Generated
             {
                 return GetRuleContext<NilContext>(0);
             }
-            [System.Diagnostics.DebuggerNonUserCode] public ITerminalNode BOOLEAN() { return GetToken(ClojureParser.BOOLEAN, 0); }
+            [System.Diagnostics.DebuggerNonUserCode]
+            public BooleanContext boolean()
+            {
+                return GetRuleContext<BooleanContext>(0);
+            }
             [System.Diagnostics.DebuggerNonUserCode]
             public KeywordContext keyword()
             {
@@ -1830,14 +1835,14 @@ namespace ClojureCompiler.Generated
             EnterRule(_localctx, 44, RULE_literal);
             try
             {
-                State = 194;
+                State = 196;
                 ErrorHandler.Sync(this);
                 switch (TokenStream.LA(1))
                 {
                     case STRING:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 186;
+                            State = 188;
                             @string();
                         }
                         break;
@@ -1848,7 +1853,7 @@ namespace ClojureCompiler.Generated
                     case BIGN:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 187;
+                            State = 189;
                             number();
                         }
                         break;
@@ -1857,28 +1862,28 @@ namespace ClojureCompiler.Generated
                     case CHAR_ANY:
                         EnterOuterAlt(_localctx, 3);
                         {
-                            State = 188;
+                            State = 190;
                             character();
                         }
                         break;
                     case NIL:
                         EnterOuterAlt(_localctx, 4);
                         {
-                            State = 189;
+                            State = 191;
                             nil();
                         }
                         break;
                     case BOOLEAN:
                         EnterOuterAlt(_localctx, 5);
                         {
-                            State = 190;
-                            Match(BOOLEAN);
+                            State = 192;
+                            boolean();
                         }
                         break;
                     case T__19:
                         EnterOuterAlt(_localctx, 6);
                         {
-                            State = 191;
+                            State = 193;
                             keyword();
                         }
                         break;
@@ -1886,19 +1891,74 @@ namespace ClojureCompiler.Generated
                     case NS_SYMBOL:
                         EnterOuterAlt(_localctx, 7);
                         {
-                            State = 192;
+                            State = 194;
                             symbol();
                         }
                         break;
                     case PARAM_NAME:
                         EnterOuterAlt(_localctx, 8);
                         {
-                            State = 193;
+                            State = 195;
                             param_name();
                         }
                         break;
                     default:
                         throw new NoViableAltException(this);
+                }
+            }
+            catch (RecognitionException re)
+            {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally
+            {
+                ExitRule();
+            }
+            return _localctx;
+        }
+
+        public partial class BooleanContext : ParserRuleContext
+        {
+            [System.Diagnostics.DebuggerNonUserCode] public ITerminalNode BOOLEAN() { return GetToken(ClojureParser.BOOLEAN, 0); }
+            public BooleanContext(ParserRuleContext parent, int invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override int RuleIndex { get { return RULE_boolean; } }
+            [System.Diagnostics.DebuggerNonUserCode]
+            public override void EnterRule(IParseTreeListener listener)
+            {
+                IClojureListener typedListener = listener as IClojureListener;
+                if (typedListener != null) typedListener.EnterBoolean(this);
+            }
+            [System.Diagnostics.DebuggerNonUserCode]
+            public override void ExitRule(IParseTreeListener listener)
+            {
+                IClojureListener typedListener = listener as IClojureListener;
+                if (typedListener != null) typedListener.ExitBoolean(this);
+            }
+            [System.Diagnostics.DebuggerNonUserCode]
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
+            {
+                IClojureVisitor<TResult> typedVisitor = visitor as IClojureVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitBoolean(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
+
+        [RuleVersion(0)]
+        public BooleanContext boolean()
+        {
+            BooleanContext _localctx = new BooleanContext(Context, State);
+            EnterRule(_localctx, 46, RULE_boolean);
+            try
+            {
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 198;
+                    Match(BOOLEAN);
                 }
             }
             catch (RecognitionException re)
@@ -1947,12 +2007,12 @@ namespace ClojureCompiler.Generated
         public StringContext @string()
         {
             StringContext _localctx = new StringContext(Context, State);
-            EnterRule(_localctx, 46, RULE_string);
+            EnterRule(_localctx, 48, RULE_string);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 196;
+                    State = 200;
                     Match(STRING);
                 }
             }
@@ -2002,12 +2062,12 @@ namespace ClojureCompiler.Generated
         public HexContext hex()
         {
             HexContext _localctx = new HexContext(Context, State);
-            EnterRule(_localctx, 48, RULE_hex);
+            EnterRule(_localctx, 50, RULE_hex);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 198;
+                    State = 202;
                     Match(HEX);
                 }
             }
@@ -2057,12 +2117,12 @@ namespace ClojureCompiler.Generated
         public BinContext bin()
         {
             BinContext _localctx = new BinContext(Context, State);
-            EnterRule(_localctx, 50, RULE_bin);
+            EnterRule(_localctx, 52, RULE_bin);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 200;
+                    State = 204;
                     Match(BIN);
                 }
             }
@@ -2112,12 +2172,12 @@ namespace ClojureCompiler.Generated
         public BignContext bign()
         {
             BignContext _localctx = new BignContext(Context, State);
-            EnterRule(_localctx, 52, RULE_bign);
+            EnterRule(_localctx, 54, RULE_bign);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 202;
+                    State = 206;
                     Match(BIGN);
                 }
             }
@@ -2183,45 +2243,45 @@ namespace ClojureCompiler.Generated
         public NumberContext number()
         {
             NumberContext _localctx = new NumberContext(Context, State);
-            EnterRule(_localctx, 54, RULE_number);
+            EnterRule(_localctx, 56, RULE_number);
             try
             {
-                State = 209;
+                State = 213;
                 ErrorHandler.Sync(this);
                 switch (TokenStream.LA(1))
                 {
                     case FLOAT:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 204;
+                            State = 208;
                             Match(FLOAT);
                         }
                         break;
                     case HEX:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 205;
+                            State = 209;
                             hex();
                         }
                         break;
                     case BIN:
                         EnterOuterAlt(_localctx, 3);
                         {
-                            State = 206;
+                            State = 210;
                             bin();
                         }
                         break;
                     case BIGN:
                         EnterOuterAlt(_localctx, 4);
                         {
-                            State = 207;
+                            State = 211;
                             bign();
                         }
                         break;
                     case LONG:
                         EnterOuterAlt(_localctx, 5);
                         {
-                            State = 208;
+                            State = 212;
                             Match(LONG);
                         }
                         break;
@@ -2289,31 +2349,31 @@ namespace ClojureCompiler.Generated
         public CharacterContext character()
         {
             CharacterContext _localctx = new CharacterContext(Context, State);
-            EnterRule(_localctx, 56, RULE_character);
+            EnterRule(_localctx, 58, RULE_character);
             try
             {
-                State = 214;
+                State = 218;
                 ErrorHandler.Sync(this);
                 switch (TokenStream.LA(1))
                 {
                     case CHAR_NAMED:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 211;
+                            State = 215;
                             named_char();
                         }
                         break;
                     case CHAR_U:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 212;
+                            State = 216;
                             u_hex_quad();
                         }
                         break;
                     case CHAR_ANY:
                         EnterOuterAlt(_localctx, 3);
                         {
-                            State = 213;
+                            State = 217;
                             any_char();
                         }
                         break;
@@ -2367,12 +2427,12 @@ namespace ClojureCompiler.Generated
         public Named_charContext named_char()
         {
             Named_charContext _localctx = new Named_charContext(Context, State);
-            EnterRule(_localctx, 58, RULE_named_char);
+            EnterRule(_localctx, 60, RULE_named_char);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 216;
+                    State = 220;
                     Match(CHAR_NAMED);
                 }
             }
@@ -2422,12 +2482,12 @@ namespace ClojureCompiler.Generated
         public Any_charContext any_char()
         {
             Any_charContext _localctx = new Any_charContext(Context, State);
-            EnterRule(_localctx, 60, RULE_any_char);
+            EnterRule(_localctx, 62, RULE_any_char);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 218;
+                    State = 222;
                     Match(CHAR_ANY);
                 }
             }
@@ -2477,12 +2537,12 @@ namespace ClojureCompiler.Generated
         public U_hex_quadContext u_hex_quad()
         {
             U_hex_quadContext _localctx = new U_hex_quadContext(Context, State);
-            EnterRule(_localctx, 62, RULE_u_hex_quad);
+            EnterRule(_localctx, 64, RULE_u_hex_quad);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 220;
+                    State = 224;
                     Match(CHAR_U);
                 }
             }
@@ -2532,12 +2592,12 @@ namespace ClojureCompiler.Generated
         public NilContext nil()
         {
             NilContext _localctx = new NilContext(Context, State);
-            EnterRule(_localctx, 64, RULE_nil);
+            EnterRule(_localctx, 66, RULE_nil);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 222;
+                    State = 226;
                     Match(NIL);
                 }
             }
@@ -2596,24 +2656,24 @@ namespace ClojureCompiler.Generated
         public KeywordContext keyword()
         {
             KeywordContext _localctx = new KeywordContext(Context, State);
-            EnterRule(_localctx, 66, RULE_keyword);
+            EnterRule(_localctx, 68, RULE_keyword);
             try
             {
-                State = 226;
+                State = 230;
                 ErrorHandler.Sync(this);
                 switch (Interpreter.AdaptivePredict(TokenStream, 8, Context))
                 {
                     case 1:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 224;
+                            State = 228;
                             macro_keyword();
                         }
                         break;
                     case 2:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 225;
+                            State = 229;
                             simple_keyword();
                         }
                         break;
@@ -2669,14 +2729,14 @@ namespace ClojureCompiler.Generated
         public Simple_keywordContext simple_keyword()
         {
             Simple_keywordContext _localctx = new Simple_keywordContext(Context, State);
-            EnterRule(_localctx, 68, RULE_simple_keyword);
+            EnterRule(_localctx, 70, RULE_simple_keyword);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 228;
+                    State = 232;
                     Match(T__19);
-                    State = 229;
+                    State = 233;
                     symbol();
                 }
             }
@@ -2730,16 +2790,16 @@ namespace ClojureCompiler.Generated
         public Macro_keywordContext macro_keyword()
         {
             Macro_keywordContext _localctx = new Macro_keywordContext(Context, State);
-            EnterRule(_localctx, 70, RULE_macro_keyword);
+            EnterRule(_localctx, 72, RULE_macro_keyword);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 231;
+                    State = 235;
                     Match(T__19);
-                    State = 232;
+                    State = 236;
                     Match(T__19);
-                    State = 233;
+                    State = 237;
                     symbol();
                 }
             }
@@ -2798,24 +2858,24 @@ namespace ClojureCompiler.Generated
         public SymbolContext symbol()
         {
             SymbolContext _localctx = new SymbolContext(Context, State);
-            EnterRule(_localctx, 72, RULE_symbol);
+            EnterRule(_localctx, 74, RULE_symbol);
             try
             {
-                State = 237;
+                State = 241;
                 ErrorHandler.Sync(this);
                 switch (TokenStream.LA(1))
                 {
                     case NS_SYMBOL:
                         EnterOuterAlt(_localctx, 1);
                         {
-                            State = 235;
+                            State = 239;
                             ns_symbol();
                         }
                         break;
                     case SYMBOL:
                         EnterOuterAlt(_localctx, 2);
                         {
-                            State = 236;
+                            State = 240;
                             simple_sym();
                         }
                         break;
@@ -2869,12 +2929,12 @@ namespace ClojureCompiler.Generated
         public Simple_symContext simple_sym()
         {
             Simple_symContext _localctx = new Simple_symContext(Context, State);
-            EnterRule(_localctx, 74, RULE_simple_sym);
+            EnterRule(_localctx, 76, RULE_simple_sym);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 239;
+                    State = 243;
                     Match(SYMBOL);
                 }
             }
@@ -2924,12 +2984,12 @@ namespace ClojureCompiler.Generated
         public Ns_symbolContext ns_symbol()
         {
             Ns_symbolContext _localctx = new Ns_symbolContext(Context, State);
-            EnterRule(_localctx, 76, RULE_ns_symbol);
+            EnterRule(_localctx, 78, RULE_ns_symbol);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 241;
+                    State = 245;
                     Match(NS_SYMBOL);
                 }
             }
@@ -2979,12 +3039,12 @@ namespace ClojureCompiler.Generated
         public Param_nameContext param_name()
         {
             Param_nameContext _localctx = new Param_nameContext(Context, State);
-            EnterRule(_localctx, 78, RULE_param_name);
+            EnterRule(_localctx, 80, RULE_param_name);
             try
             {
                 EnterOuterAlt(_localctx, 1);
                 {
-                    State = 243;
+                    State = 247;
                     Match(PARAM_NAME);
                 }
             }
@@ -3003,7 +3063,7 @@ namespace ClojureCompiler.Generated
 
         private static char[] _serializedATN = {
             '\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786',
-            '\x5964', '\x3', '%', '\xF8', '\x4', '\x2', '\t', '\x2', '\x4', '\x3',
+            '\x5964', '\x3', '%', '\xFC', '\x4', '\x2', '\t', '\x2', '\x4', '\x3',
             '\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4',
             '\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b',
             '\x4', '\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v',
@@ -3018,182 +3078,186 @@ namespace ClojureCompiler.Generated
             ' ', '\t', ' ', '\x4', '!', '\t', '!', '\x4', '\"', '\t', '\"', '\x4',
             '#', '\t', '#', '\x4', '$', '\t', '$', '\x4', '%', '\t', '%', '\x4', '&',
             '\t', '&', '\x4', '\'', '\t', '\'', '\x4', '(', '\t', '(', '\x4', ')',
-            '\t', ')', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x3', '\x3',
-            '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x5', '\x3', '[', '\n',
-            '\x3', '\x3', '\x4', '\a', '\x4', '^', '\n', '\x4', '\f', '\x4', '\xE',
-            '\x4', '\x61', '\v', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', '\x5',
-            '\x3', '\x5', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6',
-            '\x3', '\a', '\x3', '\a', '\x3', '\a', '\x3', '\a', '\a', '\a', 'o', '\n',
-            '\a', '\f', '\a', '\xE', '\a', 'r', '\v', '\a', '\x3', '\a', '\x3', '\a',
-            '\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3', '\t', '\x3',
-            '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t',
+            '\t', ')', '\x4', '*', '\t', '*', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2',
+            '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3',
+            '\x5', '\x3', ']', '\n', '\x3', '\x3', '\x4', '\a', '\x4', '`', '\n',
+            '\x4', '\f', '\x4', '\xE', '\x4', '\x63', '\v', '\x4', '\x3', '\x5', '\x3',
+            '\x5', '\x3', '\x5', '\x3', '\x5', '\x3', '\x6', '\x3', '\x6', '\x3',
+            '\x6', '\x3', '\x6', '\x3', '\a', '\x3', '\a', '\x3', '\a', '\x3', '\a',
+            '\a', '\a', 'q', '\n', '\a', '\f', '\a', '\xE', '\a', 't', '\v', '\a',
+            '\x3', '\a', '\x3', '\a', '\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3',
+            '\b', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t',
             '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3',
-            '\t', '\x3', '\t', '\x3', '\t', '\x5', '\t', '\x89', '\n', '\t', '\x3',
-            '\n', '\x3', '\n', '\x3', '\n', '\x3', '\v', '\x3', '\v', '\x3', '\v',
-            '\x3', '\f', '\x3', '\f', '\x3', '\f', '\x3', '\r', '\x3', '\r', '\x3',
-            '\r', '\x3', '\xE', '\x3', '\xE', '\x3', '\xE', '\x3', '\xE', '\x3', '\xF',
-            '\x3', '\xF', '\x3', '\xF', '\x3', '\x10', '\x3', '\x10', '\x3', '\x10',
-            '\x3', '\x11', '\x3', '\x11', '\x3', '\x11', '\x3', '\x11', '\x3', '\x12',
-            '\x3', '\x12', '\x3', '\x12', '\x3', '\x12', '\x3', '\x12', '\x5', '\x12',
-            '\xAA', '\n', '\x12', '\x3', '\x13', '\x3', '\x13', '\x3', '\x13', '\x3',
-            '\x14', '\x3', '\x14', '\x3', '\x14', '\x3', '\x14', '\x3', '\x15', '\x3',
-            '\x15', '\x3', '\x15', '\x3', '\x16', '\x3', '\x16', '\x3', '\x16', '\x3',
-            '\x16', '\x3', '\x17', '\x3', '\x17', '\x3', '\x17', '\x3', '\x18', '\x3',
-            '\x18', '\x3', '\x18', '\x3', '\x18', '\x3', '\x18', '\x3', '\x18', '\x3',
-            '\x18', '\x3', '\x18', '\x5', '\x18', '\xC5', '\n', '\x18', '\x3', '\x19',
-            '\x3', '\x19', '\x3', '\x1A', '\x3', '\x1A', '\x3', '\x1B', '\x3', '\x1B',
-            '\x3', '\x1C', '\x3', '\x1C', '\x3', '\x1D', '\x3', '\x1D', '\x3', '\x1D',
-            '\x3', '\x1D', '\x3', '\x1D', '\x5', '\x1D', '\xD4', '\n', '\x1D', '\x3',
-            '\x1E', '\x3', '\x1E', '\x3', '\x1E', '\x5', '\x1E', '\xD9', '\n', '\x1E',
-            '\x3', '\x1F', '\x3', '\x1F', '\x3', ' ', '\x3', ' ', '\x3', '!', '\x3',
-            '!', '\x3', '\"', '\x3', '\"', '\x3', '#', '\x3', '#', '\x5', '#', '\xE5',
-            '\n', '#', '\x3', '$', '\x3', '$', '\x3', '$', '\x3', '%', '\x3', '%',
-            '\x3', '%', '\x3', '%', '\x3', '&', '\x3', '&', '\x5', '&', '\xF0', '\n',
-            '&', '\x3', '\'', '\x3', '\'', '\x3', '(', '\x3', '(', '\x3', ')', '\x3',
-            ')', '\x3', ')', '\x2', '\x2', '*', '\x2', '\x4', '\x6', '\b', '\n', '\f',
-            '\xE', '\x10', '\x12', '\x14', '\x16', '\x18', '\x1A', '\x1C', '\x1E',
-            ' ', '\"', '$', '&', '(', '*', ',', '.', '\x30', '\x32', '\x34', '\x36',
-            '\x38', ':', '<', '>', '@', '\x42', '\x44', '\x46', 'H', 'J', 'L', 'N',
-            'P', '\x2', '\x2', '\x2', '\xF3', '\x2', 'R', '\x3', '\x2', '\x2', '\x2',
-            '\x4', 'Z', '\x3', '\x2', '\x2', '\x2', '\x6', '_', '\x3', '\x2', '\x2',
-            '\x2', '\b', '\x62', '\x3', '\x2', '\x2', '\x2', '\n', '\x66', '\x3',
-            '\x2', '\x2', '\x2', '\f', 'j', '\x3', '\x2', '\x2', '\x2', '\xE', 'u',
-            '\x3', '\x2', '\x2', '\x2', '\x10', '\x88', '\x3', '\x2', '\x2', '\x2',
-            '\x12', '\x8A', '\x3', '\x2', '\x2', '\x2', '\x14', '\x8D', '\x3', '\x2',
-            '\x2', '\x2', '\x16', '\x90', '\x3', '\x2', '\x2', '\x2', '\x18', '\x93',
-            '\x3', '\x2', '\x2', '\x2', '\x1A', '\x96', '\x3', '\x2', '\x2', '\x2',
-            '\x1C', '\x9A', '\x3', '\x2', '\x2', '\x2', '\x1E', '\x9D', '\x3', '\x2',
-            '\x2', '\x2', ' ', '\xA0', '\x3', '\x2', '\x2', '\x2', '\"', '\xA4', '\x3',
-            '\x2', '\x2', '\x2', '$', '\xAB', '\x3', '\x2', '\x2', '\x2', '&', '\xAE',
-            '\x3', '\x2', '\x2', '\x2', '(', '\xB2', '\x3', '\x2', '\x2', '\x2', '*',
-            '\xB5', '\x3', '\x2', '\x2', '\x2', ',', '\xB9', '\x3', '\x2', '\x2',
-            '\x2', '.', '\xC4', '\x3', '\x2', '\x2', '\x2', '\x30', '\xC6', '\x3',
-            '\x2', '\x2', '\x2', '\x32', '\xC8', '\x3', '\x2', '\x2', '\x2', '\x34',
-            '\xCA', '\x3', '\x2', '\x2', '\x2', '\x36', '\xCC', '\x3', '\x2', '\x2',
-            '\x2', '\x38', '\xD3', '\x3', '\x2', '\x2', '\x2', ':', '\xD8', '\x3',
-            '\x2', '\x2', '\x2', '<', '\xDA', '\x3', '\x2', '\x2', '\x2', '>', '\xDC',
-            '\x3', '\x2', '\x2', '\x2', '@', '\xDE', '\x3', '\x2', '\x2', '\x2', '\x42',
-            '\xE0', '\x3', '\x2', '\x2', '\x2', '\x44', '\xE4', '\x3', '\x2', '\x2',
-            '\x2', '\x46', '\xE6', '\x3', '\x2', '\x2', '\x2', 'H', '\xE9', '\x3',
-            '\x2', '\x2', '\x2', 'J', '\xEF', '\x3', '\x2', '\x2', '\x2', 'L', '\xF1',
-            '\x3', '\x2', '\x2', '\x2', 'N', '\xF3', '\x3', '\x2', '\x2', '\x2', 'P',
-            '\xF5', '\x3', '\x2', '\x2', '\x2', 'R', 'S', '\x5', '\x6', '\x4', '\x2',
-            'S', 'T', '\a', '\x2', '\x2', '\x3', 'T', '\x3', '\x3', '\x2', '\x2',
-            '\x2', 'U', '[', '\x5', '.', '\x18', '\x2', 'V', '[', '\x5', '\b', '\x5',
-            '\x2', 'W', '[', '\x5', '\n', '\x6', '\x2', 'X', '[', '\x5', '\f', '\a',
-            '\x2', 'Y', '[', '\x5', '\x10', '\t', '\x2', 'Z', 'U', '\x3', '\x2', '\x2',
-            '\x2', 'Z', 'V', '\x3', '\x2', '\x2', '\x2', 'Z', 'W', '\x3', '\x2', '\x2',
-            '\x2', 'Z', 'X', '\x3', '\x2', '\x2', '\x2', 'Z', 'Y', '\x3', '\x2', '\x2',
-            '\x2', '[', '\x5', '\x3', '\x2', '\x2', '\x2', '\\', '^', '\x5', '\x4',
-            '\x3', '\x2', ']', '\\', '\x3', '\x2', '\x2', '\x2', '^', '\x61', '\x3',
-            '\x2', '\x2', '\x2', '_', ']', '\x3', '\x2', '\x2', '\x2', '_', '`', '\x3',
-            '\x2', '\x2', '\x2', '`', '\a', '\x3', '\x2', '\x2', '\x2', '\x61', '_',
-            '\x3', '\x2', '\x2', '\x2', '\x62', '\x63', '\a', '\x3', '\x2', '\x2',
-            '\x63', '\x64', '\x5', '\x6', '\x4', '\x2', '\x64', '\x65', '\a', '\x4',
-            '\x2', '\x2', '\x65', '\t', '\x3', '\x2', '\x2', '\x2', '\x66', 'g', '\a',
-            '\x5', '\x2', '\x2', 'g', 'h', '\x5', '\x6', '\x4', '\x2', 'h', 'i', '\a',
-            '\x6', '\x2', '\x2', 'i', '\v', '\x3', '\x2', '\x2', '\x2', 'j', 'p',
-            '\a', '\a', '\x2', '\x2', 'k', 'l', '\x5', '\x4', '\x3', '\x2', 'l', 'm',
-            '\x5', '\x4', '\x3', '\x2', 'm', 'o', '\x3', '\x2', '\x2', '\x2', 'n',
-            'k', '\x3', '\x2', '\x2', '\x2', 'o', 'r', '\x3', '\x2', '\x2', '\x2',
-            'p', 'n', '\x3', '\x2', '\x2', '\x2', 'p', 'q', '\x3', '\x2', '\x2', '\x2',
-            'q', 's', '\x3', '\x2', '\x2', '\x2', 'r', 'p', '\x3', '\x2', '\x2', '\x2',
-            's', 't', '\a', '\b', '\x2', '\x2', 't', '\r', '\x3', '\x2', '\x2', '\x2',
-            'u', 'v', '\a', '\t', '\x2', '\x2', 'v', 'w', '\x5', '\x6', '\x4', '\x2',
-            'w', 'x', '\a', '\b', '\x2', '\x2', 'x', '\xF', '\x3', '\x2', '\x2', '\x2',
-            'y', '\x89', '\x5', ' ', '\x11', '\x2', 'z', '\x89', '\x5', '\"', '\x12',
-            '\x2', '{', '\x89', '\x5', ',', '\x17', '\x2', '|', '\x89', '\x5', '$',
-            '\x13', '\x2', '}', '\x89', '\x5', '&', '\x14', '\x2', '~', '\x89', '\x5',
-            '\xE', '\b', '\x2', '\x7F', '\x89', '\x5', '\x1A', '\xE', '\x2', '\x80',
-            '\x89', '\x5', '(', '\x15', '\x2', '\x81', '\x89', '\x5', '*', '\x16',
-            '\x2', '\x82', '\x89', '\x5', '\x1C', '\xF', '\x2', '\x83', '\x89', '\x5',
-            '\x12', '\n', '\x2', '\x84', '\x89', '\x5', '\x14', '\v', '\x2', '\x85',
-            '\x89', '\x5', '\x16', '\f', '\x2', '\x86', '\x89', '\x5', '\x18', '\r',
-            '\x2', '\x87', '\x89', '\x5', '\x1E', '\x10', '\x2', '\x88', 'y', '\x3',
-            '\x2', '\x2', '\x2', '\x88', 'z', '\x3', '\x2', '\x2', '\x2', '\x88',
-            '{', '\x3', '\x2', '\x2', '\x2', '\x88', '|', '\x3', '\x2', '\x2', '\x2',
-            '\x88', '}', '\x3', '\x2', '\x2', '\x2', '\x88', '~', '\x3', '\x2', '\x2',
-            '\x2', '\x88', '\x7F', '\x3', '\x2', '\x2', '\x2', '\x88', '\x80', '\x3',
-            '\x2', '\x2', '\x2', '\x88', '\x81', '\x3', '\x2', '\x2', '\x2', '\x88',
-            '\x82', '\x3', '\x2', '\x2', '\x2', '\x88', '\x83', '\x3', '\x2', '\x2',
-            '\x2', '\x88', '\x84', '\x3', '\x2', '\x2', '\x2', '\x88', '\x85', '\x3',
-            '\x2', '\x2', '\x2', '\x88', '\x86', '\x3', '\x2', '\x2', '\x2', '\x88',
-            '\x87', '\x3', '\x2', '\x2', '\x2', '\x89', '\x11', '\x3', '\x2', '\x2',
-            '\x2', '\x8A', '\x8B', '\a', '\n', '\x2', '\x2', '\x8B', '\x8C', '\x5',
-            '\x4', '\x3', '\x2', '\x8C', '\x13', '\x3', '\x2', '\x2', '\x2', '\x8D',
-            '\x8E', '\a', '\v', '\x2', '\x2', '\x8E', '\x8F', '\x5', '\x4', '\x3',
-            '\x2', '\x8F', '\x15', '\x3', '\x2', '\x2', '\x2', '\x90', '\x91', '\a',
-            '\f', '\x2', '\x2', '\x91', '\x92', '\x5', '\x4', '\x3', '\x2', '\x92',
-            '\x17', '\x3', '\x2', '\x2', '\x2', '\x93', '\x94', '\a', '\r', '\x2',
-            '\x2', '\x94', '\x95', '\x5', '\x4', '\x3', '\x2', '\x95', '\x19', '\x3',
-            '\x2', '\x2', '\x2', '\x96', '\x97', '\a', '\xE', '\x2', '\x2', '\x97',
-            '\x98', '\x5', '\x4', '\x3', '\x2', '\x98', '\x99', '\x5', '\x4', '\x3',
-            '\x2', '\x99', '\x1B', '\x3', '\x2', '\x2', '\x2', '\x9A', '\x9B', '\a',
-            '\xF', '\x2', '\x2', '\x9B', '\x9C', '\x5', '\x4', '\x3', '\x2', '\x9C',
-            '\x1D', '\x3', '\x2', '\x2', '\x2', '\x9D', '\x9E', '\a', '\"', '\x2',
-            '\x2', '\x9E', '\x9F', '\a', '\x10', '\x2', '\x2', '\x9F', '\x1F', '\x3',
-            '\x2', '\x2', '\x2', '\xA0', '\xA1', '\a', '\x11', '\x2', '\x2', '\xA1',
-            '\xA2', '\x5', '\x6', '\x4', '\x2', '\xA2', '\xA3', '\a', '\x4', '\x2',
-            '\x2', '\xA3', '!', '\x3', '\x2', '\x2', '\x2', '\xA4', '\xA9', '\a',
-            '\x12', '\x2', '\x2', '\xA5', '\xA6', '\x5', '\f', '\a', '\x2', '\xA6',
-            '\xA7', '\x5', '\x4', '\x3', '\x2', '\xA7', '\xAA', '\x3', '\x2', '\x2',
-            '\x2', '\xA8', '\xAA', '\x5', '\x4', '\x3', '\x2', '\xA9', '\xA5', '\x3',
-            '\x2', '\x2', '\x2', '\xA9', '\xA8', '\x3', '\x2', '\x2', '\x2', '\xAA',
-            '#', '\x3', '\x2', '\x2', '\x2', '\xAB', '\xAC', '\a', '\x13', '\x2',
-            '\x2', '\xAC', '\xAD', '\x5', 'J', '&', '\x2', '\xAD', '%', '\x3', '\x2',
-            '\x2', '\x2', '\xAE', '\xAF', '\a', '\x14', '\x2', '\x2', '\xAF', '\xB0',
-            '\x5', '\x4', '\x3', '\x2', '\xB0', '\xB1', '\x5', '\x4', '\x3', '\x2',
-            '\xB1', '\'', '\x3', '\x2', '\x2', '\x2', '\xB2', '\xB3', '\a', '\x15',
-            '\x2', '\x2', '\xB3', '\xB4', '\x5', '\x4', '\x3', '\x2', '\xB4', ')',
-            '\x3', '\x2', '\x2', '\x2', '\xB5', '\xB6', '\a', '\x10', '\x2', '\x2',
-            '\xB6', '\xB7', '\x5', 'J', '&', '\x2', '\xB7', '\xB8', '\x5', '\x4',
-            '\x3', '\x2', '\xB8', '+', '\x3', '\x2', '\x2', '\x2', '\xB9', '\xBA',
-            '\a', '\x10', '\x2', '\x2', '\xBA', '\xBB', '\x5', '\x30', '\x19', '\x2',
-            '\xBB', '-', '\x3', '\x2', '\x2', '\x2', '\xBC', '\xC5', '\x5', '\x30',
-            '\x19', '\x2', '\xBD', '\xC5', '\x5', '\x38', '\x1D', '\x2', '\xBE', '\xC5',
-            '\x5', ':', '\x1E', '\x2', '\xBF', '\xC5', '\x5', '\x42', '\"', '\x2',
-            '\xC0', '\xC5', '\a', '!', '\x2', '\x2', '\xC1', '\xC5', '\x5', '\x44',
-            '#', '\x2', '\xC2', '\xC5', '\x5', 'J', '&', '\x2', '\xC3', '\xC5', '\x5',
-            'P', ')', '\x2', '\xC4', '\xBC', '\x3', '\x2', '\x2', '\x2', '\xC4', '\xBD',
-            '\x3', '\x2', '\x2', '\x2', '\xC4', '\xBE', '\x3', '\x2', '\x2', '\x2',
-            '\xC4', '\xBF', '\x3', '\x2', '\x2', '\x2', '\xC4', '\xC0', '\x3', '\x2',
-            '\x2', '\x2', '\xC4', '\xC1', '\x3', '\x2', '\x2', '\x2', '\xC4', '\xC2',
-            '\x3', '\x2', '\x2', '\x2', '\xC4', '\xC3', '\x3', '\x2', '\x2', '\x2',
-            '\xC5', '/', '\x3', '\x2', '\x2', '\x2', '\xC6', '\xC7', '\a', '\x17',
-            '\x2', '\x2', '\xC7', '\x31', '\x3', '\x2', '\x2', '\x2', '\xC8', '\xC9',
-            '\a', '\x19', '\x2', '\x2', '\xC9', '\x33', '\x3', '\x2', '\x2', '\x2',
-            '\xCA', '\xCB', '\a', '\x1A', '\x2', '\x2', '\xCB', '\x35', '\x3', '\x2',
-            '\x2', '\x2', '\xCC', '\xCD', '\a', '\x1C', '\x2', '\x2', '\xCD', '\x37',
-            '\x3', '\x2', '\x2', '\x2', '\xCE', '\xD4', '\a', '\x18', '\x2', '\x2',
-            '\xCF', '\xD4', '\x5', '\x32', '\x1A', '\x2', '\xD0', '\xD4', '\x5', '\x34',
-            '\x1B', '\x2', '\xD1', '\xD4', '\x5', '\x36', '\x1C', '\x2', '\xD2', '\xD4',
-            '\a', '\x1B', '\x2', '\x2', '\xD3', '\xCE', '\x3', '\x2', '\x2', '\x2',
-            '\xD3', '\xCF', '\x3', '\x2', '\x2', '\x2', '\xD3', '\xD0', '\x3', '\x2',
-            '\x2', '\x2', '\xD3', '\xD1', '\x3', '\x2', '\x2', '\x2', '\xD3', '\xD2',
-            '\x3', '\x2', '\x2', '\x2', '\xD4', '\x39', '\x3', '\x2', '\x2', '\x2',
-            '\xD5', '\xD9', '\x5', '<', '\x1F', '\x2', '\xD6', '\xD9', '\x5', '@',
-            '!', '\x2', '\xD7', '\xD9', '\x5', '>', ' ', '\x2', '\xD8', '\xD5', '\x3',
-            '\x2', '\x2', '\x2', '\xD8', '\xD6', '\x3', '\x2', '\x2', '\x2', '\xD8',
-            '\xD7', '\x3', '\x2', '\x2', '\x2', '\xD9', ';', '\x3', '\x2', '\x2',
-            '\x2', '\xDA', '\xDB', '\a', '\x1E', '\x2', '\x2', '\xDB', '=', '\x3',
-            '\x2', '\x2', '\x2', '\xDC', '\xDD', '\a', '\x1F', '\x2', '\x2', '\xDD',
-            '?', '\x3', '\x2', '\x2', '\x2', '\xDE', '\xDF', '\a', '\x1D', '\x2',
-            '\x2', '\xDF', '\x41', '\x3', '\x2', '\x2', '\x2', '\xE0', '\xE1', '\a',
-            ' ', '\x2', '\x2', '\xE1', '\x43', '\x3', '\x2', '\x2', '\x2', '\xE2',
-            '\xE5', '\x5', 'H', '%', '\x2', '\xE3', '\xE5', '\x5', '\x46', '$', '\x2',
-            '\xE4', '\xE2', '\x3', '\x2', '\x2', '\x2', '\xE4', '\xE3', '\x3', '\x2',
-            '\x2', '\x2', '\xE5', '\x45', '\x3', '\x2', '\x2', '\x2', '\xE6', '\xE7',
-            '\a', '\x16', '\x2', '\x2', '\xE7', '\xE8', '\x5', 'J', '&', '\x2', '\xE8',
-            'G', '\x3', '\x2', '\x2', '\x2', '\xE9', '\xEA', '\a', '\x16', '\x2',
-            '\x2', '\xEA', '\xEB', '\a', '\x16', '\x2', '\x2', '\xEB', '\xEC', '\x5',
-            'J', '&', '\x2', '\xEC', 'I', '\x3', '\x2', '\x2', '\x2', '\xED', '\xF0',
-            '\x5', 'N', '(', '\x2', '\xEE', '\xF0', '\x5', 'L', '\'', '\x2', '\xEF',
-            '\xED', '\x3', '\x2', '\x2', '\x2', '\xEF', '\xEE', '\x3', '\x2', '\x2',
-            '\x2', '\xF0', 'K', '\x3', '\x2', '\x2', '\x2', '\xF1', '\xF2', '\a',
-            '\"', '\x2', '\x2', '\xF2', 'M', '\x3', '\x2', '\x2', '\x2', '\xF3', '\xF4',
-            '\a', '#', '\x2', '\x2', '\xF4', 'O', '\x3', '\x2', '\x2', '\x2', '\xF5',
-            '\xF6', '\a', '$', '\x2', '\x2', '\xF6', 'Q', '\x3', '\x2', '\x2', '\x2',
-            '\f', 'Z', '_', 'p', '\x88', '\xA9', '\xC4', '\xD3', '\xD8', '\xE4', '\xEF',
+            '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x5', '\t',
+            '\x8B', '\n', '\t', '\x3', '\n', '\x3', '\n', '\x3', '\n', '\x3', '\v',
+            '\x3', '\v', '\x3', '\v', '\x3', '\f', '\x3', '\f', '\x3', '\f', '\x3',
+            '\r', '\x3', '\r', '\x3', '\r', '\x3', '\xE', '\x3', '\xE', '\x3', '\xE',
+            '\x3', '\xE', '\x3', '\xF', '\x3', '\xF', '\x3', '\xF', '\x3', '\x10',
+            '\x3', '\x10', '\x3', '\x10', '\x3', '\x11', '\x3', '\x11', '\x3', '\x11',
+            '\x3', '\x11', '\x3', '\x12', '\x3', '\x12', '\x3', '\x12', '\x3', '\x12',
+            '\x3', '\x12', '\x5', '\x12', '\xAC', '\n', '\x12', '\x3', '\x13', '\x3',
+            '\x13', '\x3', '\x13', '\x3', '\x14', '\x3', '\x14', '\x3', '\x14', '\x3',
+            '\x14', '\x3', '\x15', '\x3', '\x15', '\x3', '\x15', '\x3', '\x16', '\x3',
+            '\x16', '\x3', '\x16', '\x3', '\x16', '\x3', '\x17', '\x3', '\x17', '\x3',
+            '\x17', '\x3', '\x18', '\x3', '\x18', '\x3', '\x18', '\x3', '\x18', '\x3',
+            '\x18', '\x3', '\x18', '\x3', '\x18', '\x3', '\x18', '\x5', '\x18', '\xC7',
+            '\n', '\x18', '\x3', '\x19', '\x3', '\x19', '\x3', '\x1A', '\x3', '\x1A',
+            '\x3', '\x1B', '\x3', '\x1B', '\x3', '\x1C', '\x3', '\x1C', '\x3', '\x1D',
+            '\x3', '\x1D', '\x3', '\x1E', '\x3', '\x1E', '\x3', '\x1E', '\x3', '\x1E',
+            '\x3', '\x1E', '\x5', '\x1E', '\xD8', '\n', '\x1E', '\x3', '\x1F', '\x3',
+            '\x1F', '\x3', '\x1F', '\x5', '\x1F', '\xDD', '\n', '\x1F', '\x3', ' ',
+            '\x3', ' ', '\x3', '!', '\x3', '!', '\x3', '\"', '\x3', '\"', '\x3', '#',
+            '\x3', '#', '\x3', '$', '\x3', '$', '\x5', '$', '\xE9', '\n', '$', '\x3',
+            '%', '\x3', '%', '\x3', '%', '\x3', '&', '\x3', '&', '\x3', '&', '\x3',
+            '&', '\x3', '\'', '\x3', '\'', '\x5', '\'', '\xF4', '\n', '\'', '\x3',
+            '(', '\x3', '(', '\x3', ')', '\x3', ')', '\x3', '*', '\x3', '*', '\x3',
+            '*', '\x2', '\x2', '+', '\x2', '\x4', '\x6', '\b', '\n', '\f', '\xE',
+            '\x10', '\x12', '\x14', '\x16', '\x18', '\x1A', '\x1C', '\x1E', ' ', '\"',
+            '$', '&', '(', '*', ',', '.', '\x30', '\x32', '\x34', '\x36', '\x38',
+            ':', '<', '>', '@', '\x42', '\x44', '\x46', 'H', 'J', 'L', 'N', 'P', 'R',
+            '\x2', '\x2', '\x2', '\xF6', '\x2', 'T', '\x3', '\x2', '\x2', '\x2', '\x4',
+            '\\', '\x3', '\x2', '\x2', '\x2', '\x6', '\x61', '\x3', '\x2', '\x2',
+            '\x2', '\b', '\x64', '\x3', '\x2', '\x2', '\x2', '\n', 'h', '\x3', '\x2',
+            '\x2', '\x2', '\f', 'l', '\x3', '\x2', '\x2', '\x2', '\xE', 'w', '\x3',
+            '\x2', '\x2', '\x2', '\x10', '\x8A', '\x3', '\x2', '\x2', '\x2', '\x12',
+            '\x8C', '\x3', '\x2', '\x2', '\x2', '\x14', '\x8F', '\x3', '\x2', '\x2',
+            '\x2', '\x16', '\x92', '\x3', '\x2', '\x2', '\x2', '\x18', '\x95', '\x3',
+            '\x2', '\x2', '\x2', '\x1A', '\x98', '\x3', '\x2', '\x2', '\x2', '\x1C',
+            '\x9C', '\x3', '\x2', '\x2', '\x2', '\x1E', '\x9F', '\x3', '\x2', '\x2',
+            '\x2', ' ', '\xA2', '\x3', '\x2', '\x2', '\x2', '\"', '\xA6', '\x3', '\x2',
+            '\x2', '\x2', '$', '\xAD', '\x3', '\x2', '\x2', '\x2', '&', '\xB0', '\x3',
+            '\x2', '\x2', '\x2', '(', '\xB4', '\x3', '\x2', '\x2', '\x2', '*', '\xB7',
+            '\x3', '\x2', '\x2', '\x2', ',', '\xBB', '\x3', '\x2', '\x2', '\x2', '.',
+            '\xC6', '\x3', '\x2', '\x2', '\x2', '\x30', '\xC8', '\x3', '\x2', '\x2',
+            '\x2', '\x32', '\xCA', '\x3', '\x2', '\x2', '\x2', '\x34', '\xCC', '\x3',
+            '\x2', '\x2', '\x2', '\x36', '\xCE', '\x3', '\x2', '\x2', '\x2', '\x38',
+            '\xD0', '\x3', '\x2', '\x2', '\x2', ':', '\xD7', '\x3', '\x2', '\x2',
+            '\x2', '<', '\xDC', '\x3', '\x2', '\x2', '\x2', '>', '\xDE', '\x3', '\x2',
+            '\x2', '\x2', '@', '\xE0', '\x3', '\x2', '\x2', '\x2', '\x42', '\xE2',
+            '\x3', '\x2', '\x2', '\x2', '\x44', '\xE4', '\x3', '\x2', '\x2', '\x2',
+            '\x46', '\xE8', '\x3', '\x2', '\x2', '\x2', 'H', '\xEA', '\x3', '\x2',
+            '\x2', '\x2', 'J', '\xED', '\x3', '\x2', '\x2', '\x2', 'L', '\xF3', '\x3',
+            '\x2', '\x2', '\x2', 'N', '\xF5', '\x3', '\x2', '\x2', '\x2', 'P', '\xF7',
+            '\x3', '\x2', '\x2', '\x2', 'R', '\xF9', '\x3', '\x2', '\x2', '\x2', 'T',
+            'U', '\x5', '\x6', '\x4', '\x2', 'U', 'V', '\a', '\x2', '\x2', '\x3',
+            'V', '\x3', '\x3', '\x2', '\x2', '\x2', 'W', ']', '\x5', '.', '\x18',
+            '\x2', 'X', ']', '\x5', '\b', '\x5', '\x2', 'Y', ']', '\x5', '\n', '\x6',
+            '\x2', 'Z', ']', '\x5', '\f', '\a', '\x2', '[', ']', '\x5', '\x10', '\t',
+            '\x2', '\\', 'W', '\x3', '\x2', '\x2', '\x2', '\\', 'X', '\x3', '\x2',
+            '\x2', '\x2', '\\', 'Y', '\x3', '\x2', '\x2', '\x2', '\\', 'Z', '\x3',
+            '\x2', '\x2', '\x2', '\\', '[', '\x3', '\x2', '\x2', '\x2', ']', '\x5',
+            '\x3', '\x2', '\x2', '\x2', '^', '`', '\x5', '\x4', '\x3', '\x2', '_',
+            '^', '\x3', '\x2', '\x2', '\x2', '`', '\x63', '\x3', '\x2', '\x2', '\x2',
+            '\x61', '_', '\x3', '\x2', '\x2', '\x2', '\x61', '\x62', '\x3', '\x2',
+            '\x2', '\x2', '\x62', '\a', '\x3', '\x2', '\x2', '\x2', '\x63', '\x61',
+            '\x3', '\x2', '\x2', '\x2', '\x64', '\x65', '\a', '\x3', '\x2', '\x2',
+            '\x65', '\x66', '\x5', '\x6', '\x4', '\x2', '\x66', 'g', '\a', '\x4',
+            '\x2', '\x2', 'g', '\t', '\x3', '\x2', '\x2', '\x2', 'h', 'i', '\a', '\x5',
+            '\x2', '\x2', 'i', 'j', '\x5', '\x6', '\x4', '\x2', 'j', 'k', '\a', '\x6',
+            '\x2', '\x2', 'k', '\v', '\x3', '\x2', '\x2', '\x2', 'l', 'r', '\a', '\a',
+            '\x2', '\x2', 'm', 'n', '\x5', '\x4', '\x3', '\x2', 'n', 'o', '\x5', '\x4',
+            '\x3', '\x2', 'o', 'q', '\x3', '\x2', '\x2', '\x2', 'p', 'm', '\x3', '\x2',
+            '\x2', '\x2', 'q', 't', '\x3', '\x2', '\x2', '\x2', 'r', 'p', '\x3', '\x2',
+            '\x2', '\x2', 'r', 's', '\x3', '\x2', '\x2', '\x2', 's', 'u', '\x3', '\x2',
+            '\x2', '\x2', 't', 'r', '\x3', '\x2', '\x2', '\x2', 'u', 'v', '\a', '\b',
+            '\x2', '\x2', 'v', '\r', '\x3', '\x2', '\x2', '\x2', 'w', 'x', '\a', '\t',
+            '\x2', '\x2', 'x', 'y', '\x5', '\x6', '\x4', '\x2', 'y', 'z', '\a', '\b',
+            '\x2', '\x2', 'z', '\xF', '\x3', '\x2', '\x2', '\x2', '{', '\x8B', '\x5',
+            ' ', '\x11', '\x2', '|', '\x8B', '\x5', '\"', '\x12', '\x2', '}', '\x8B',
+            '\x5', ',', '\x17', '\x2', '~', '\x8B', '\x5', '$', '\x13', '\x2', '\x7F',
+            '\x8B', '\x5', '&', '\x14', '\x2', '\x80', '\x8B', '\x5', '\xE', '\b',
+            '\x2', '\x81', '\x8B', '\x5', '\x1A', '\xE', '\x2', '\x82', '\x8B', '\x5',
+            '(', '\x15', '\x2', '\x83', '\x8B', '\x5', '*', '\x16', '\x2', '\x84',
+            '\x8B', '\x5', '\x1C', '\xF', '\x2', '\x85', '\x8B', '\x5', '\x12', '\n',
+            '\x2', '\x86', '\x8B', '\x5', '\x14', '\v', '\x2', '\x87', '\x8B', '\x5',
+            '\x16', '\f', '\x2', '\x88', '\x8B', '\x5', '\x18', '\r', '\x2', '\x89',
+            '\x8B', '\x5', '\x1E', '\x10', '\x2', '\x8A', '{', '\x3', '\x2', '\x2',
+            '\x2', '\x8A', '|', '\x3', '\x2', '\x2', '\x2', '\x8A', '}', '\x3', '\x2',
+            '\x2', '\x2', '\x8A', '~', '\x3', '\x2', '\x2', '\x2', '\x8A', '\x7F',
+            '\x3', '\x2', '\x2', '\x2', '\x8A', '\x80', '\x3', '\x2', '\x2', '\x2',
+            '\x8A', '\x81', '\x3', '\x2', '\x2', '\x2', '\x8A', '\x82', '\x3', '\x2',
+            '\x2', '\x2', '\x8A', '\x83', '\x3', '\x2', '\x2', '\x2', '\x8A', '\x84',
+            '\x3', '\x2', '\x2', '\x2', '\x8A', '\x85', '\x3', '\x2', '\x2', '\x2',
+            '\x8A', '\x86', '\x3', '\x2', '\x2', '\x2', '\x8A', '\x87', '\x3', '\x2',
+            '\x2', '\x2', '\x8A', '\x88', '\x3', '\x2', '\x2', '\x2', '\x8A', '\x89',
+            '\x3', '\x2', '\x2', '\x2', '\x8B', '\x11', '\x3', '\x2', '\x2', '\x2',
+            '\x8C', '\x8D', '\a', '\n', '\x2', '\x2', '\x8D', '\x8E', '\x5', '\x4',
+            '\x3', '\x2', '\x8E', '\x13', '\x3', '\x2', '\x2', '\x2', '\x8F', '\x90',
+            '\a', '\v', '\x2', '\x2', '\x90', '\x91', '\x5', '\x4', '\x3', '\x2',
+            '\x91', '\x15', '\x3', '\x2', '\x2', '\x2', '\x92', '\x93', '\a', '\f',
+            '\x2', '\x2', '\x93', '\x94', '\x5', '\x4', '\x3', '\x2', '\x94', '\x17',
+            '\x3', '\x2', '\x2', '\x2', '\x95', '\x96', '\a', '\r', '\x2', '\x2',
+            '\x96', '\x97', '\x5', '\x4', '\x3', '\x2', '\x97', '\x19', '\x3', '\x2',
+            '\x2', '\x2', '\x98', '\x99', '\a', '\xE', '\x2', '\x2', '\x99', '\x9A',
+            '\x5', '\x4', '\x3', '\x2', '\x9A', '\x9B', '\x5', '\x4', '\x3', '\x2',
+            '\x9B', '\x1B', '\x3', '\x2', '\x2', '\x2', '\x9C', '\x9D', '\a', '\xF',
+            '\x2', '\x2', '\x9D', '\x9E', '\x5', '\x4', '\x3', '\x2', '\x9E', '\x1D',
+            '\x3', '\x2', '\x2', '\x2', '\x9F', '\xA0', '\a', '\"', '\x2', '\x2',
+            '\xA0', '\xA1', '\a', '\x10', '\x2', '\x2', '\xA1', '\x1F', '\x3', '\x2',
+            '\x2', '\x2', '\xA2', '\xA3', '\a', '\x11', '\x2', '\x2', '\xA3', '\xA4',
+            '\x5', '\x6', '\x4', '\x2', '\xA4', '\xA5', '\a', '\x4', '\x2', '\x2',
+            '\xA5', '!', '\x3', '\x2', '\x2', '\x2', '\xA6', '\xAB', '\a', '\x12',
+            '\x2', '\x2', '\xA7', '\xA8', '\x5', '\f', '\a', '\x2', '\xA8', '\xA9',
+            '\x5', '\x4', '\x3', '\x2', '\xA9', '\xAC', '\x3', '\x2', '\x2', '\x2',
+            '\xAA', '\xAC', '\x5', '\x4', '\x3', '\x2', '\xAB', '\xA7', '\x3', '\x2',
+            '\x2', '\x2', '\xAB', '\xAA', '\x3', '\x2', '\x2', '\x2', '\xAC', '#',
+            '\x3', '\x2', '\x2', '\x2', '\xAD', '\xAE', '\a', '\x13', '\x2', '\x2',
+            '\xAE', '\xAF', '\x5', 'L', '\'', '\x2', '\xAF', '%', '\x3', '\x2', '\x2',
+            '\x2', '\xB0', '\xB1', '\a', '\x14', '\x2', '\x2', '\xB1', '\xB2', '\x5',
+            '\x4', '\x3', '\x2', '\xB2', '\xB3', '\x5', '\x4', '\x3', '\x2', '\xB3',
+            '\'', '\x3', '\x2', '\x2', '\x2', '\xB4', '\xB5', '\a', '\x15', '\x2',
+            '\x2', '\xB5', '\xB6', '\x5', '\x4', '\x3', '\x2', '\xB6', ')', '\x3',
+            '\x2', '\x2', '\x2', '\xB7', '\xB8', '\a', '\x10', '\x2', '\x2', '\xB8',
+            '\xB9', '\x5', 'L', '\'', '\x2', '\xB9', '\xBA', '\x5', '\x4', '\x3',
+            '\x2', '\xBA', '+', '\x3', '\x2', '\x2', '\x2', '\xBB', '\xBC', '\a',
+            '\x10', '\x2', '\x2', '\xBC', '\xBD', '\x5', '\x32', '\x1A', '\x2', '\xBD',
+            '-', '\x3', '\x2', '\x2', '\x2', '\xBE', '\xC7', '\x5', '\x32', '\x1A',
+            '\x2', '\xBF', '\xC7', '\x5', ':', '\x1E', '\x2', '\xC0', '\xC7', '\x5',
+            '<', '\x1F', '\x2', '\xC1', '\xC7', '\x5', '\x44', '#', '\x2', '\xC2',
+            '\xC7', '\x5', '\x30', '\x19', '\x2', '\xC3', '\xC7', '\x5', '\x46', '$',
+            '\x2', '\xC4', '\xC7', '\x5', 'L', '\'', '\x2', '\xC5', '\xC7', '\x5',
+            'R', '*', '\x2', '\xC6', '\xBE', '\x3', '\x2', '\x2', '\x2', '\xC6', '\xBF',
+            '\x3', '\x2', '\x2', '\x2', '\xC6', '\xC0', '\x3', '\x2', '\x2', '\x2',
+            '\xC6', '\xC1', '\x3', '\x2', '\x2', '\x2', '\xC6', '\xC2', '\x3', '\x2',
+            '\x2', '\x2', '\xC6', '\xC3', '\x3', '\x2', '\x2', '\x2', '\xC6', '\xC4',
+            '\x3', '\x2', '\x2', '\x2', '\xC6', '\xC5', '\x3', '\x2', '\x2', '\x2',
+            '\xC7', '/', '\x3', '\x2', '\x2', '\x2', '\xC8', '\xC9', '\a', '!', '\x2',
+            '\x2', '\xC9', '\x31', '\x3', '\x2', '\x2', '\x2', '\xCA', '\xCB', '\a',
+            '\x17', '\x2', '\x2', '\xCB', '\x33', '\x3', '\x2', '\x2', '\x2', '\xCC',
+            '\xCD', '\a', '\x19', '\x2', '\x2', '\xCD', '\x35', '\x3', '\x2', '\x2',
+            '\x2', '\xCE', '\xCF', '\a', '\x1A', '\x2', '\x2', '\xCF', '\x37', '\x3',
+            '\x2', '\x2', '\x2', '\xD0', '\xD1', '\a', '\x1C', '\x2', '\x2', '\xD1',
+            '\x39', '\x3', '\x2', '\x2', '\x2', '\xD2', '\xD8', '\a', '\x18', '\x2',
+            '\x2', '\xD3', '\xD8', '\x5', '\x34', '\x1B', '\x2', '\xD4', '\xD8', '\x5',
+            '\x36', '\x1C', '\x2', '\xD5', '\xD8', '\x5', '\x38', '\x1D', '\x2', '\xD6',
+            '\xD8', '\a', '\x1B', '\x2', '\x2', '\xD7', '\xD2', '\x3', '\x2', '\x2',
+            '\x2', '\xD7', '\xD3', '\x3', '\x2', '\x2', '\x2', '\xD7', '\xD4', '\x3',
+            '\x2', '\x2', '\x2', '\xD7', '\xD5', '\x3', '\x2', '\x2', '\x2', '\xD7',
+            '\xD6', '\x3', '\x2', '\x2', '\x2', '\xD8', ';', '\x3', '\x2', '\x2',
+            '\x2', '\xD9', '\xDD', '\x5', '>', ' ', '\x2', '\xDA', '\xDD', '\x5',
+            '\x42', '\"', '\x2', '\xDB', '\xDD', '\x5', '@', '!', '\x2', '\xDC', '\xD9',
+            '\x3', '\x2', '\x2', '\x2', '\xDC', '\xDA', '\x3', '\x2', '\x2', '\x2',
+            '\xDC', '\xDB', '\x3', '\x2', '\x2', '\x2', '\xDD', '=', '\x3', '\x2',
+            '\x2', '\x2', '\xDE', '\xDF', '\a', '\x1E', '\x2', '\x2', '\xDF', '?',
+            '\x3', '\x2', '\x2', '\x2', '\xE0', '\xE1', '\a', '\x1F', '\x2', '\x2',
+            '\xE1', '\x41', '\x3', '\x2', '\x2', '\x2', '\xE2', '\xE3', '\a', '\x1D',
+            '\x2', '\x2', '\xE3', '\x43', '\x3', '\x2', '\x2', '\x2', '\xE4', '\xE5',
+            '\a', ' ', '\x2', '\x2', '\xE5', '\x45', '\x3', '\x2', '\x2', '\x2', '\xE6',
+            '\xE9', '\x5', 'J', '&', '\x2', '\xE7', '\xE9', '\x5', 'H', '%', '\x2',
+            '\xE8', '\xE6', '\x3', '\x2', '\x2', '\x2', '\xE8', '\xE7', '\x3', '\x2',
+            '\x2', '\x2', '\xE9', 'G', '\x3', '\x2', '\x2', '\x2', '\xEA', '\xEB',
+            '\a', '\x16', '\x2', '\x2', '\xEB', '\xEC', '\x5', 'L', '\'', '\x2', '\xEC',
+            'I', '\x3', '\x2', '\x2', '\x2', '\xED', '\xEE', '\a', '\x16', '\x2',
+            '\x2', '\xEE', '\xEF', '\a', '\x16', '\x2', '\x2', '\xEF', '\xF0', '\x5',
+            'L', '\'', '\x2', '\xF0', 'K', '\x3', '\x2', '\x2', '\x2', '\xF1', '\xF4',
+            '\x5', 'P', ')', '\x2', '\xF2', '\xF4', '\x5', 'N', '(', '\x2', '\xF3',
+            '\xF1', '\x3', '\x2', '\x2', '\x2', '\xF3', '\xF2', '\x3', '\x2', '\x2',
+            '\x2', '\xF4', 'M', '\x3', '\x2', '\x2', '\x2', '\xF5', '\xF6', '\a',
+            '\"', '\x2', '\x2', '\xF6', 'O', '\x3', '\x2', '\x2', '\x2', '\xF7', '\xF8',
+            '\a', '#', '\x2', '\x2', '\xF8', 'Q', '\x3', '\x2', '\x2', '\x2', '\xF9',
+            '\xFA', '\a', '$', '\x2', '\x2', '\xFA', 'S', '\x3', '\x2', '\x2', '\x2',
+            '\f', '\\', '\x61', 'r', '\x8A', '\xAB', '\xC6', '\xD7', '\xDC', '\xE8',
+            '\xF3',
         };
 
         public static readonly ATN _ATN =

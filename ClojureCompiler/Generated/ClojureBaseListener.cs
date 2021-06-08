@@ -314,6 +314,18 @@ namespace ClojureCompiler.Generated
         /// <param name="context">The parse tree.</param>
         public virtual void ExitLiteral([NotNull] ClojureParser.LiteralContext context) { }
         /// <summary>
+        /// Enter a parse tree produced by <see cref="ClojureParser.boolean"/>.
+        /// <para>The default implementation does nothing.</para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        public virtual void EnterBoolean([NotNull] ClojureParser.BooleanContext context) { }
+        /// <summary>
+        /// Exit a parse tree produced by <see cref="ClojureParser.boolean"/>.
+        /// <para>The default implementation does nothing.</para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        public virtual void ExitBoolean([NotNull] ClojureParser.BooleanContext context) { }
+        /// <summary>
         /// Enter a parse tree produced by <see cref="ClojureParser.string"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>

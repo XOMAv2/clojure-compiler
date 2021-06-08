@@ -268,6 +268,16 @@ namespace ClojureCompiler.Generated
         /// <return>The visitor result.</return>
         public virtual Result VisitLiteral([NotNull] ClojureParser.LiteralContext context) => VisitChildren(context);
         /// <summary>
+        /// Visit a parse tree produced by <see cref="ClojureParser.boolean"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitBoolean([NotNull] ClojureParser.BooleanContext context) => VisitChildren(context);
+        /// <summary>
         /// Visit a parse tree produced by <see cref="ClojureParser.string"/>.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
