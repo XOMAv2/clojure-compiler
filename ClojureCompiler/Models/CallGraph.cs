@@ -44,7 +44,7 @@ namespace ClojureCompiler.Models
                 newBuf += $"  \"{edges[i].Key}\" -> \"{edges[i].Value}\";\n";
             }
 
-            Console.WriteLine(newBuf);
+            //Console.WriteLine(newBuf);
             buf += newBuf + "}\n";
 
             return buf;

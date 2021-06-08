@@ -29,74 +29,36 @@ namespace ClojureCompiler.Implementation
                 ?.symbol()
                 ?.GetText();
 
-            //_ = firstEl ?? throw new SyntaxException($"Can't call the {context.GetText()} funciton.");
+            int scopeCount = firstEl switch
+            {
+                "def" => DefDeclaration(context, SymbolTable),
+                "fn" => FnDeclaration(context, SymbolTable),
+                "defn" => DefnDeclaration(context, SymbolTable),
+                "let" => LetDeclaration(context, SymbolTable),
+                "loop" => LoopDeclaration(context, SymbolTable),
+                _ when context.forms()?.form(0)?.vector() is { }
+                       && context.Parent?.Parent?.Parent is ListContext
+                       && (context.Parent?.Parent as FormsContext)?.form(0)?.literal()?.symbol()?.GetText() is ("defn" or "fn") =>
+                    OverloadDeclaration(context, SymbolTable),
+                { } => 0,
+                null => throw new SyntaxException($"Can't call the {context.GetText()} funciton."),
+            };
 
-            if (firstEl == "def")
+            var result = base.VisitList(context);
+            for (int i = 0; i < scopeCount; i++)
             {
-                SymbolBase sym = DefDeclaration(context, SymbolTable.Root);
-                SymbolTable.Root.Redefine(sym);
-                return base.VisitList(context);
-
+                SymbolTable.PopScope();
             }
-            //else if (firstEl == "fn")
-            //{
-            //    int scopeCount = FnDeclaration(context, SymbolTable);
-            //    var result = base.VisitList(context);
-            //    for (int i = 0; i < scopeCount; i++)
-            //    {
-            //        SymbolTable.PopScope();
-            //    }
-            //    return result;
-            //}
-            else if (firstEl == "defn")
-            {
-                int scopeCount = DefnDeclaration(context, SymbolTable);
-                var result = base.VisitList(context);
-                for (int i = 0; i < scopeCount; i++)
-                {
-                    SymbolTable.PopScope();
-                }
-                return result;
-            }
-            else if (firstEl == "let")
-            {
-                int scopeCount = LetDeclaration(context, SymbolTable);
-                var result = base.VisitList(context);
-                for (int i = 0; i < scopeCount; i++)
-                {
-                    SymbolTable.PopScope();
-                }
-                return result;
-            }
-            else if (firstEl == "loop")
-            {
-                int scopeCount = LoopDeclaration(context, SymbolTable);
-                var result = base.VisitList(context);
-                for (int i = 0; i < scopeCount; i++)
-                {
-                    SymbolTable.PopScope();
-                }
-                return result;
-            }
-            else
-            {
-                return base.VisitList(context);
-            }
+            return result;
         }
 
-        /// <returns>
-        /// not null <see cref="SymbolBase" />.
-        /// </returns>
-        private static SymbolBase DefDeclaration([NotNull] ListContext context, Scope rootScope)
+        /// <returns> The number of open scopes. </returns>
+        private static int DefDeclaration([NotNull] ListContext context, SymbolTable symbolTable)
         {
-            _ = rootScope ?? throw new ArgumentNullException(nameof(rootScope));
+            _ = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
 
-            if (rootScope.Parent != null)
-            {
-                throw new ArgumentException(
-                    "The scope for the def declartion must be the root one.",
-                    nameof(rootScope));
-            }
+            _ = symbolTable.Root ?? throw new ArgumentException(
+                "The symbol table doesn't have a root scope.", nameof(symbolTable));
 
             if (context.forms().ChildCount == 1)
             {
@@ -119,49 +81,61 @@ namespace ClojureCompiler.Implementation
             SymbolBase sym = (arg2, docString, arg3) switch
             {
                 // Any symbol declaration.
-                (null, null, null) => new AnySymbol(arg1, rootScope),
+                (null, null, null) => new AnySymbol(arg1, symbolTable.Root),
 
                 // TODO: Type resolving.
 
                 // Typed symbol declaration without docString.
-                ({ }, null, null) => new AnySymbol(arg1, rootScope),
+                ({ }, null, null) => new AnySymbol(arg1, symbolTable.Root),
 
                 // Typed symbol declaration with docString.
                 ({ }, { }, { }) => new AnySymbol(
                     arg1,
-                    rootScope,
+                    symbolTable.Root,
                     new Dictionary<string, ParserRuleContext>() { { ":doc", docString } }),
 
                 _ => throw new SyntaxException("Too many arguments to def"),
             };
 
-            return sym;
+            symbolTable.Root.Redefine(sym);
+
+            return 0;
         }
 
-        ///// <returns> The number of open scopes. </returns>
-        //private static int FnDeclaration([NotNull] ListContext context, SymbolTable symbolTable)
-        //{
-        //    _ = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
+        /// <returns> The number of open scopes. </returns>
+        private static int FnDeclaration([NotNull] ListContext context, SymbolTable symbolTable)
+        {
+            _ = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
 
-        //    if (context.forms().ChildCount == 1 || context.forms().ChildCount == 2)
-        //    {
-        //        throw new SyntaxException("Too few arguments to fn.");
-        //    }
+            FnSignature signature = CheckFunctionSignature(context);
 
-        //    FormContext arg1 = context.forms()?.form(1);
-        //    SymbolContext arg1Sym = arg1?.literal()?.symbol();
-        //    VectorContext arg1Vec = arg1?.vector();
-        //    VectorContext arg2Vec = context.forms()?.form(2)?.vector();
+            if (signature.Symbol != null)
+            {
+                Scope fnScope = symbolTable.PushScope();
+                FunctionSymbol fnSym = new(signature.Symbol, fnScope);
+                fnScope.Define(fnSym);
+            }
 
-        //    SymbolBase sym = (arg1Sym, arg1Vec, arg2Vec) switch
-        //    {
-        //        ({ }, null, { }) => new FunctionSymbol(arg1Sym, scope),
-        //        (null, { }, _) => null,
-        //        _ => throw new SyntaxException("The params argument must be a vector."),
-        //    };
+            if (signature.HasOverloads == false)
+            {
+                Scope argsScope = symbolTable.PushScope();
+                VectorContext args = context.forms().form(signature.Symbol == null ? 1 : 2).vector();
 
-        //    return sym;
-        //}
+                for (int i = 0; i < args.forms().ChildCount; i++)
+                {
+                    AnySymbol argSym = new(args.forms().form(i).literal().symbol(), argsScope);
+                    argsScope.Define(argSym);
+                }
+            }
+
+            return (signature.Symbol, signature.HasOverloads) switch
+            {
+                (null, true) => 0,
+                (null, false) => 1,
+                ({ }, true) => 1,
+                ({ }, false) => 2,
+            };
+        }
 
         // TODO: add FnSignature into FunctionSymbol class.
 
@@ -191,12 +165,16 @@ namespace ClojureCompiler.Implementation
                 ("defn", _, _, _) when arg1?.literal()?.symbol() is null =>
                     throw new SyntaxException("First argument to defn must be a symbol."),
 
-                // (defn kek "doc" ([])+) or (fn kek "doc" ([])+)
-                _ when arg1?.literal()?.symbol() is { } sym && arg2?.literal()?.@string() is { } doc && arg3?.list() is { } =>
+                // (defn kek "doc" ([])+)
+                ("defn", _, _, _) when arg1?.literal()?.symbol() is { } sym
+                                       && arg2?.literal()?.@string() is { } doc
+                                       && arg3?.list() is { } =>
                     new FnSignature(sym, doc, 0, true),
 
-                // (defn kek "doc" []) or (fn kek "doc" [])
-                _ when arg1?.literal()?.symbol() is { } sym && arg2?.literal()?.@string() is { } doc && arg3?.vector() is { } =>
+                // (defn kek "doc" [])
+                ("defn", _, _, _) when arg1?.literal()?.symbol() is { } sym
+                                       && arg2?.literal()?.@string() is { } doc
+                                       && arg3?.vector() is { } =>
                     new FnSignature(sym, doc, 1, false),
 
                 // (defn kek ([])+) or (fn kek ([])+)
@@ -206,14 +184,6 @@ namespace ClojureCompiler.Implementation
                 // (defn kek []) or (fn kek [])
                 _ when arg1?.literal()?.symbol() is { } sym && arg2?.vector() is { } =>
                     new FnSignature(sym, null, 1, false),
-
-                // (fn "doc" ([])+)
-                ("fn", _, _, _) when arg1?.literal()?.@string() is { } doc && arg2?.list() is { } =>
-                    new FnSignature(null, doc, 0, true),
-
-                // (fn "doc" [])
-                ("fn", _, _, _) when arg1?.literal()?.@string() is { } doc && arg2?.vector() is { } =>
-                    new FnSignature(null, doc, 1, false),
 
                 // (fn ([])+)
                 ("fn", _, _, _) when arg1?.list() is { } =>
@@ -289,12 +259,38 @@ namespace ClojureCompiler.Implementation
 
                 for (int i = 0; i < args.forms().ChildCount; i++)
                 {
-                    AnySymbol sym = new(args.forms().form(i).literal().symbol(), argsScope);
-                    argsScope.Define(sym);
+                    AnySymbol argSym = new(args.forms().form(i).literal().symbol(), argsScope);
+                    argsScope.Define(argSym);
                 }
 
                 return 1;
             }
+        }
+
+        /// <returns> The number of open scopes. </returns>
+        private static int OverloadDeclaration([NotNull] ListContext context, SymbolTable symbolTable)
+        {
+            _ = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
+
+            var kek = context.GetText();
+            VectorContext args = context.forms()?.form(0)?.vector();
+
+            _ = args ?? throw new SyntaxException("Each overload must be a " +
+                "list with the first argument \"params\" being a vector");
+
+            Scope argsScope = symbolTable.PushScope();
+
+            for (int i = 0; i < args.forms().ChildCount; i++)
+            {
+                SymbolContext arg = args.forms()?.form(i)?.literal()?.symbol();
+
+                _ = arg ?? throw new SyntaxException("Function arguments must be symbols.");
+
+                AnySymbol sym = new(arg, argsScope);
+                argsScope.Define(sym);
+            }
+
+            return 1;
         }
 
         /// <returns> The number of open scopes. </returns>
@@ -334,6 +330,7 @@ namespace ClojureCompiler.Implementation
             return scopeCount;
         }
 
+        /// <returns> The number of open scopes. </returns>
         private static int LoopDeclaration([NotNull] ListContext context, SymbolTable symbolTable)
         {
             _ = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
