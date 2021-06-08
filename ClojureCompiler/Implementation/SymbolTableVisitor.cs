@@ -41,7 +41,7 @@ namespace ClojureCompiler.Implementation
                        && (context.Parent?.Parent as FormsContext)?.form(0)?.literal()?.symbol()?.GetText() is ("defn" or "fn") =>
                     OverloadDeclaration(context, SymbolTable),
                 { } => 0,
-                null => throw new SyntaxException($"Can't call the {context.GetText()} funciton."),
+                null => throw new SyntaxException($"Can't call the {context.GetText()} function."),
             };
 
             var result = base.VisitList(context);
