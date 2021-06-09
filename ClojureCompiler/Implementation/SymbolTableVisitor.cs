@@ -1,4 +1,4 @@
-﻿using Antlr4.Runtime;
+using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using ClojureCompiler.Exceptions;
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using static ClojureCompiler.Generated.ClojureParser;
+using static ClojureCompiler.Models.Symbols.FunctionSymbol;
 
 namespace ClojureCompiler.Implementation
 {
@@ -18,7 +19,98 @@ namespace ClojureCompiler.Implementation
         /// <summary>
         /// Table of all symbol definitions.
         /// </summary>
-        public SymbolTable SymbolTable { get; } = new();
+        public SymbolTable SymbolTable { get; }
+
+        public SymbolTableVisitor() : base()
+        {
+            SymbolTable = new();
+            List<FunctionSymbol> coreFunctions = new();
+            Type number = typeof(NumberSymbol);
+            Type any = typeof(AnySymbol);
+            Type boolean = typeof(BooleanSymbol);
+            Signature atLeastOne = new(new[] { any, any }, true, any);
+
+            FunctionSymbol sym = new("+", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new List<Type>(), false, number));
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(atLeastOne);
+            coreFunctions.Add(sym);
+
+            sym = new("-", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(atLeastOne);
+            coreFunctions.Add(sym);
+
+            sym = new("/", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(atLeastOne);
+            coreFunctions.Add(sym);
+
+            sym = new("*", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new List<Type>(), false, number));
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(atLeastOne);
+            coreFunctions.Add(sym);
+
+            sym = new("=", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { any, any }, true, boolean));
+            coreFunctions.Add(sym);
+
+            sym = new("not=", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { any, any }, true, boolean));
+            coreFunctions.Add(sym);
+
+            sym = new("<", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(new Signature(new[] { any, any }, true, boolean));
+            coreFunctions.Add(sym);
+
+            sym = new("<=", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(new Signature(new[] { any, any }, true, boolean));
+            coreFunctions.Add(sym);
+
+            sym = new(">", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(new Signature(new[] { any, any }, true, boolean));
+            coreFunctions.Add(sym);
+
+            sym = new(">=", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { number, number, number }, true, number));
+            sym.Signatures.Add(new Signature(new[] { any, any }, true, boolean));
+            coreFunctions.Add(sym);
+
+            sym = new("dec", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { any }, false, any));
+            coreFunctions.Add(sym);
+
+            sym = new("inc", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { any }, false, any));
+            coreFunctions.Add(sym);
+
+            foreach (FunctionSymbol fnSym in coreFunctions)
+            {
+                SymbolTable.Root.Define(fnSym);
+            }
+        }
 
         public override T VisitList([NotNull] ListContext context)
         {
