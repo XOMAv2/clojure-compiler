@@ -1,4 +1,4 @@
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using ClojureCompiler.Exceptions;
@@ -179,14 +179,14 @@ namespace ClojureCompiler.Implementation
 
                 // Typed symbol declaration without docString.
                 ({ }, null, null) => (SymbolBase)Activator.CreateInstance(
-                    new TypeResolvingVisitor().Resolve(arg2),
+                    new TypeResolvingVisitor().Resolve(arg2, symbolTable),
                     arg1,
                     symbolTable.Root,
                     null),
 
                 // Typed symbol declaration with docString.
                 ({ }, { }, { }) => (SymbolBase)Activator.CreateInstance(
-                    new TypeResolvingVisitor().Resolve(arg2),
+                    new TypeResolvingVisitor().Resolve(arg2, symbolTable),
                     arg1,
                     symbolTable.Root,
                     new Dictionary<string, ParserRuleContext>() { { ":doc", docString } }),
@@ -233,8 +233,6 @@ namespace ClojureCompiler.Implementation
                 ({ }, false) => 2,
             };
         }
-
-        // TODO: add FnSignature into FunctionSymbol class.
 
         private record FnSignature (SymbolContext Symbol,
                                     StringContext Doc,
@@ -419,7 +417,7 @@ namespace ClojureCompiler.Implementation
                 _ = left ?? throw new SyntaxException("Cannot bind to a non-symbol.");
 
                 Scope scope = symbolTable.PushScope();
-                Type symbolType = new TypeResolvingVisitor().Resolve(right);
+                Type symbolType = new TypeResolvingVisitor().Resolve(right, symbolTable);
                 scope.Define((SymbolBase)Activator.CreateInstance(symbolType, left, scope, null));
             }
 
@@ -455,7 +453,7 @@ namespace ClojureCompiler.Implementation
                 _ = left ?? throw new SyntaxException("Cannot bind to a non-symbol.");
 
                 Scope scope = symbolTable.PushScope();
-                Type symbolType = new TypeResolvingVisitor().Resolve(right);
+                Type symbolType = new TypeResolvingVisitor().Resolve(right, symbolTable);
                 scope.Define((SymbolBase)Activator.CreateInstance(symbolType, left, scope, null));
             }
 

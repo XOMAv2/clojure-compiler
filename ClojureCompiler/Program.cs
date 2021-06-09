@@ -21,7 +21,8 @@ namespace ClojureCompiler
                 string input = @"
 (defn kek [a b c]
   (let [a (+ 5.0 3)
-        b (- 5 2)
+        b (- 5 nil)
+        c (> 1 2 3)
         _ (fn [x y] nil)
         _ (fn ggg
             ([a])

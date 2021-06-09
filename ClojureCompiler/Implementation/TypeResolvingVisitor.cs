@@ -3,57 +3,83 @@ using System.Collections.Generic;
 using System.Linq;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
+using ClojureCompiler.Exceptions;
 using ClojureCompiler.Generated;
+using ClojureCompiler.Models;
 using ClojureCompiler.Models.Symbols;
 using static ClojureCompiler.Generated.ClojureParser;
 
 namespace ClojureCompiler.Implementation
 {
-    public class TypeResolvingVisitor : ClojureBaseVisitor<Type>
+    public class TypeResolvingVisitor : ClojureBaseVisitor<SymbolBase>
     {
-        public virtual Type Resolve(IParseTree code) =>
-            Visit(code) ?? typeof(AnySymbol);
+        private SymbolTable symbolTable = null;
+
+        public virtual Type Resolve(IParseTree code, SymbolTable table)
+        {
+            _ = code ?? throw new ArgumentNullException(nameof(code));
+            _ = table ?? throw new ArgumentNullException(nameof(table));
+
+            symbolTable = table;
+
+            return Visit(code)?.GetType() ?? typeof(AnySymbol);
+        }
 
 
-        public override Type VisitString([NotNull] StringContext context) =>
-            typeof(StringSymbol);
+        public override SymbolBase VisitString([NotNull] StringContext context) =>
+            new StringSymbol(context.GetText());
 
-        public override Type VisitCharacter([NotNull] CharacterContext context) =>
-            typeof(CharacterSymbol);
+        public override SymbolBase VisitCharacter([NotNull] CharacterContext context) =>
+            new CharacterSymbol(context.GetText());
 
-        public override Type VisitNumber([NotNull] NumberContext context) =>
-            typeof(NumberSymbol);
+        public override SymbolBase VisitNumber([NotNull] NumberContext context) =>
+            new NumberSymbol(context.GetText());
 
-        public override Type VisitNil([NotNull] NilContext context) =>
-            typeof(NilSymbol);
+        public override SymbolBase VisitNil([NotNull] NilContext context) =>
+            new NilSymbol(context.GetText());
 
-        public override Type VisitSymbol([NotNull] SymbolContext context) =>
-            typeof(SymbolSymbol);
+        public override SymbolBase VisitSymbol([NotNull] SymbolContext context) =>
+            new SymbolSymbol(context.GetText());
 
-        public override Type VisitKeyword([NotNull] KeywordContext context) =>
-            typeof(KeywordSymbol);
+        public override SymbolBase VisitKeyword([NotNull] KeywordContext context) =>
+            new KeywordSymbol(context.GetText());
 
-        public override Type VisitBoolean([NotNull] BooleanContext context) =>
-            typeof(BooleanSymbol);
+        public override SymbolBase VisitBoolean([NotNull] BooleanContext context) =>
+            new BooleanSymbol(context.GetText());
 
-        public override Type VisitLiteral([NotNull] LiteralContext context) =>
+        public override SymbolBase VisitLiteral([NotNull] LiteralContext context) =>
             // According to the grammar, a literal must contain one child.
             context.children.Select(child => Visit(child)).First();
 
-        public override Type VisitForm([NotNull] FormContext context) =>
+        public override SymbolBase VisitForm([NotNull] FormContext context) =>
             // According to the grammar, a form must contain one child.
             context.children.Select(child => Visit(child)).First();
 
-        public override Type VisitList([NotNull] ListContext context)
+        public override SymbolBase VisitList([NotNull] ListContext context)
         {
-            List<Type> results = new();
+            symbolTable.Root.SymbolMap.ContainsKey("");
+            List<SymbolBase> symbols = new();
 
             for (int i = 0; i < context.forms().ChildCount; i++)
             {
-                results.Add(Visit(context.forms().form(i)));
+                symbols.Add(Visit(context.forms().form(i)));
             }
 
-            return typeof(AnySymbol);
+            if (symbols.Count > 0 && symbols[0] is SymbolSymbol)
+            {
+                if (symbolTable.Root.SymbolMap.ContainsKey(symbols[0].Name))
+                {
+
+                    return (SymbolBase)Activator.CreateInstance(((FunctionSymbol)symbolTable.Root.SymbolMap[symbols[0].Name]).Accept(symbols.Skip(1).Select(s => s.GetType()).ToList()), context.GetText());
+                }
+                else
+                {
+                    //throw new SyntaxException(
+                    //    $"Unable to resolve symbol: {symbols[0].Name} in this context.");
+                }
+            }
+
+            return new AnySymbol(context.GetText());
         }
     }
 }
