@@ -4,13 +4,16 @@ using static ClojureCompiler.Generated.ClojureParser;
 
 namespace ClojureCompiler.Models.Symbols
 {
-    public class CollectionSymbol : SymbolBase
+    public class CollectionSymbol : AnySymbol
     {
         public CollectionSymbol(
             SymbolContext context,
             Scope scope,
             Dictionary<string, ParserRuleContext> meta = null)
             : base(context, scope, meta)
+        { }
+
+        public CollectionSymbol(string name) : base(name)
         { }
     }
 }

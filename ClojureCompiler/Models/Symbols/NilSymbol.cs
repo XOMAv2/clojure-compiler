@@ -4,13 +4,16 @@ using static ClojureCompiler.Generated.ClojureParser;
 
 namespace ClojureCompiler.Models.Symbols
 {
-    public class NilSymbol : SymbolBase
+    public class NilSymbol : AnySymbol
     {
         public NilSymbol(
             SymbolContext context,
             Scope scope,
             Dictionary<string, ParserRuleContext> meta = null)
             : base(context, scope, meta)
+        { }
+
+        public NilSymbol(string name) : base(name)
         { }
     }
 }

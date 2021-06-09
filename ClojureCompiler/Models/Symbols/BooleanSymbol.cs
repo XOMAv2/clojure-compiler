@@ -4,13 +4,16 @@ using static ClojureCompiler.Generated.ClojureParser;
 
 namespace ClojureCompiler.Models.Symbols
 {
-    public class BooleanSymbol : SymbolBase
+    public class BooleanSymbol : AnySymbol
     {
         public BooleanSymbol(
             SymbolContext context,
             Scope scope,
             Dictionary<string, ParserRuleContext> meta = null)
             : base(context, scope, meta)
+        { }
+
+        public BooleanSymbol(string name) : base(name)
         { }
     }
 }

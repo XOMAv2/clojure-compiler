@@ -16,10 +16,10 @@ namespace ClojureCompiler.Models
         /// <summary> String symbol name. </summary>
         public string Name { get; }
 
-        /// <summary> Parse rule context in parse tree. </summary>
+        /// <summary> Parse rule context in parse tree. Can be <see langword="null" />. </summary>
         public SymbolContext Context { get; }
 
-        /// <summary> Symbol scope in code. </summary>
+        /// <summary> Symbol scope in code. Can be <see langword="null" />. </summary>
         public Scope Scope { get; }
 
         public Dictionary<string, ParserRuleContext> Meta { get; }
@@ -34,14 +34,40 @@ namespace ClojureCompiler.Models
                           Scope scope,
                           Dictionary<string, ParserRuleContext> meta = null)
         {
-            _ = context ?? throw new ArgumentNullException(nameof(context));
-            _ = scope ?? throw new ArgumentNullException(nameof(scope));
+            _ = context ?? throw new ArgumentNullException(nameof(scope));
 
             Guid = Guid.NewGuid();
             Name = context.GetText();
             Context = context;
             Scope = scope;
             Meta = meta ?? new();
+        }
+
+        /// <summary>
+        /// Construct new symbol without rule context in stated scope with metadata.
+        /// </summary>
+        /// <param name="name"> Name for new symbol. </param>
+        public SymbolBase(string name)
+        {
+            Guid = Guid.NewGuid();
+            Name = name;
+            Context = null;
+            Scope = null;
+            Meta = new();
+        }
+
+        /// <summary>
+        /// Construct new symbol without rule context in stated scope with metadata.
+        /// </summary>
+        /// <param name="name"> Name for new symbol. </param>
+        /// <param name="scope"> Symbol scope according to parse tree lookup. </param>
+        public SymbolBase(string name, Scope scope)
+        {
+            Guid = Guid.NewGuid();
+            Name = name;
+            Context = null;
+            Scope = scope;
+            Meta = new();
         }
     }
 }

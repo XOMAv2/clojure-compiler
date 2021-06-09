@@ -12,5 +12,11 @@ namespace ClojureCompiler.Models.Symbols
             Dictionary<string, ParserRuleContext> meta = null)
             : base(context, scope, meta)
         { }
+
+        public AnySymbol(string name) : base(name)
+        { }
+
+        public AnySymbol(string name, Scope scope) : base(name, scope)
+        { }
     }
 }
