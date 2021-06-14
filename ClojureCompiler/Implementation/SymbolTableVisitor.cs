@@ -25,12 +25,53 @@ namespace ClojureCompiler.Implementation
         {
             SymbolTable = new();
             List<FunctionSymbol> coreFunctions = new();
-            Type number = typeof(NumberSymbol);
+
             Type any = typeof(AnySymbol);
             Type boolean = typeof(BooleanSymbol);
+            Type character = typeof(CharacterSymbol);
+            Type function = typeof(FunctionSymbol);
+            Type keyword = typeof(KeywordSymbol);
+            Type list = typeof(ListSymbol);
+            Type nil = typeof(NilSymbol);
+            Type number = typeof(NumberSymbol);
+            Type @string = typeof(StringSymbol);
+            Type symbol = typeof(SymbolSymbol);
+            Type vector = typeof(VectorSymbol);
+            
             Signature atLeastOne = new(new[] { any, any }, true, any);
 
-            FunctionSymbol sym = new("+", SymbolTable.Root);
+            FunctionSymbol sym = new("defn", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { symbol, @string, vector, any }, true, function));
+            sym.Signatures.Add(new Signature(new[] { symbol, vector, any }, true, function));
+            sym.Signatures.Add(new Signature(new[] { symbol, @string, list, list }, true, function));
+            sym.Signatures.Add(new Signature(new[] { symbol, list, list }, true, function));
+            coreFunctions.Add(sym);
+
+            sym = new("fn", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { symbol, vector, any }, true, function));
+            sym.Signatures.Add(new Signature(new[] { vector, any }, true, function));
+            sym.Signatures.Add(new Signature(new[] { symbol, list, list }, true, function));
+            sym.Signatures.Add(new Signature(new[] { vector, any }, true, function));
+            coreFunctions.Add(sym);
+
+            sym = new("comment", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { any }, true, nil));
+            coreFunctions.Add(sym);
+
+            sym = new("quote", SymbolTable.Root);
+            sym.Signatures.Add(new Signature(new[] { boolean }, false, boolean));
+            sym.Signatures.Add(new Signature(new[] { character }, false, character));
+            sym.Signatures.Add(new Signature(new[] { function }, false, function));
+            sym.Signatures.Add(new Signature(new[] { keyword }, false, keyword));
+            sym.Signatures.Add(new Signature(new[] { nil }, false, nil));
+            sym.Signatures.Add(new Signature(new[] { number }, false, number));
+            sym.Signatures.Add(new Signature(new[] { @string }, false, @string));
+            sym.Signatures.Add(new Signature(new[] { symbol }, false, symbol));
+            sym.Signatures.Add(new Signature(new[] { vector }, false, vector));
+            sym.Signatures.Add(new Signature(new[] { any }, false, any));
+            coreFunctions.Add(sym);
+
+            sym = new("+", SymbolTable.Root);
             sym.Signatures.Add(new Signature(new List<Type>(), false, number));
             sym.Signatures.Add(new Signature(new[] { number }, false, number));
             sym.Signatures.Add(new Signature(new[] { number, number }, false, number));
