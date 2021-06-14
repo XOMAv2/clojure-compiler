@@ -51,7 +51,7 @@ namespace ClojureCompiler.Models.Symbols
 
             var matchingSignatures = Signatures
                 .OrderBy(s => s.Variadic)
-                // TODO: Сигнатуры с результатом AnySymbol должны быть помещены в конец.
+                // TODO: Give priority to signatures that more accurately describe the symbol type.
                 .ThenBy(s => s.Args.Count)
                 .Where(s => (s.Args.Count == args.Count)
                             || (s.Variadic && (s.Args.Count - 1 <= args.Count)))
