@@ -15,5 +15,8 @@ namespace ClojureCompiler.Models.Symbols
 
         public NilSymbol(string name) : base(name)
         { }
+
+        public NilSymbol(string name, Scope scope) : base(name, scope)
+        { }
     }
 }

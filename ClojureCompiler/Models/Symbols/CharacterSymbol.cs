@@ -15,5 +15,8 @@ namespace ClojureCompiler.Models.Symbols
 
         public CharacterSymbol(string name) : base(name)
         { }
+
+        public CharacterSymbol(string name, Scope scope) : base(name, scope)
+        { }
     }
 }

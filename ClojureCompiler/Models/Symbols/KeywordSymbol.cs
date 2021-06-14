@@ -15,5 +15,8 @@ namespace ClojureCompiler.Models.Symbols
 
         public KeywordSymbol(string name) : base(name)
         { }
+
+        public KeywordSymbol(string name, Scope scope) : base(name, scope)
+        { }
     }
 }

@@ -15,5 +15,8 @@ namespace ClojureCompiler.Models.Symbols
 
         public BooleanSymbol(string name) : base(name)
         { }
+
+        public BooleanSymbol(string name, Scope scope) : base(name, scope)
+        { }
     }
 }
